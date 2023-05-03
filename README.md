@@ -20,12 +20,14 @@ designs, focusing on methodological advances and practical applications.
 | Advanced methods             |   0.0h   | [link](https://) | [link](https://) |
 | Take home                    |   0.0h   | [link](https://) | [link](https://) |
 
-## Presenters
-- Ginette Lafit
-- Jordan Revol
-- Mihai A. Constantin
-- Eva Ceulemans
+## Presented at
+- [SAA 2023](https://www.saa2023.nl/amsterdam/workshops) - Amsterdam, June 5th, 2023
 
+## Presenters
+- [Ginette Lafit](https://)
+- [Jordan Revol](https://)
+- [Mihai A. Constantin](https://)
+- [Eva Ceulemans](https://)
 
 ## References
 - *references here*
