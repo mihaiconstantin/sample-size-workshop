@@ -7,7 +7,10 @@
 
 <!-- Authors. -->
 <p align="center">
-    [Ginette Lafit], [Jordan Revol], [Mihai A. Constantin], & [Eva Ceulemans]
+    <a href="https://ppw.kuleuven.be/okp/team/Ginette_Lafit/">Ginette Lafit</a>,
+    <a href="https://ppw.kuleuven.be/okp/team/Jordan_Revol/">Jordan Revol</a>,
+    <a href="https://mihaiconstantin.com/">Mihai A. Constantin</a>, &
+    <a href="https://ppw.kuleuven.be/okp/team/Eva_Ceulemans/">Eva Ceulemans</a>
 </p>
 
 ## Description
@@ -68,25 +71,25 @@ Upon course completion, participants will be able to:
 
 ## Presenters
 
-- [Ginette Lafit](mailto:ginette.lafit@kuleuven.be?subject=Regarding%20the%20sample%20size%20planning%20workshop)
+- [Ginette Lafit]
   - PostDoc at Research Group of Quantitative Psychology and Individual Differences and Center of Contextual Psychiatry, KU Leuven
   - Research interests:
     - Statistical methods for intensive longitudinal (IL) designs
     - Methodology & open science in ESM research
 
-- [Jordan Revol](mailto:jordan.revol@kuleuven.be?subject=Regarding%20the%20sample%20size%20planning%20workshop)
+- [Jordan Revol]
   - PhD candidate at Research Group of Quantitative Psychology and Individual Differences, KU Leuven
   - Research interests:
     - Statistical methods for intensive longitudinal (IL) designs
     - Sample size planning methods & Predictive accuracy in IL studies
 
-- [Mihai A. Constantin](mailto:mihai@mihaiconstantin.com?subject=Regarding%20the%20sample%20size%20planning%20workshop)
+- [Mihai A. Constantin]
   - PhD candidate at Department of Methodology and Statistics, Tilburg University
   - Research interests:
     - Computational statistics and software [tools](https://github.com/mihaiconstantin) for social sciences
     - Simulation-based methods for sample size analysis
 
-- [Eva Ceulemans](mailto:eva.ceulemans@kuleuven.be?subject=Regarding%20the%20sample%20size%20planning%20workshop)
+- [Eva Ceulemans]
   - Professor of Quantitative Psychology and Individual Differences, KU Leuven
   - Research interests:
     - Dimension reduction methods for multiset and multiway data
