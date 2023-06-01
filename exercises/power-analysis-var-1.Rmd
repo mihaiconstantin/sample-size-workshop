@@ -10,13 +10,10 @@ output:
     self_contained: true
 ---
 
-
-
-
 # Prelimnary - Installing libraries used in this script (if necessary)
 
 ```{r chunk-install-package, echo=TRUE, warning=TRUE, results="hide", message=FALSE}
-# This code chunk simply makes sure that all the 
+# This code chunk simply makes sure that all the
 # libraries used here are installed.
 # Check if R packages are installed
 ## Do not run because we do not want to install packages (this should be your decision)
@@ -31,7 +28,7 @@ if(length(new.packages)) install.packages(new.packages)
 
 ```{r chunk-libraries, echo=TRUE, warning=TRUE, results="hide", message=FALSE}
 library(data.table) # to create lagged outcome
-library(psych) # to compute descriptive statistics 
+library(psych) # to compute descriptive statistics
 library(ggplot2) # for making plots
 library(tidyverse) # a useful package
 
@@ -64,7 +61,7 @@ sim_VAR_data = function(vars,Tobs,delta,psi,sigma){
   } else {
     E = mvrnorm(T.total, mu=rep(0,vars), sigma)
   }
-  
+
   # Recursive equation
   Y = matrix(0,T.total,vars)
 
@@ -95,7 +92,7 @@ This function conducts the Monte Carlo simulation for a set of 'Tobs' and comput
 ```{r, echo = TRUE}
 # Function to conduct the Monte Carlo simulation and compute statistical power for a given Tobs
 
-mc_power = function(vars,Tobs_list,delta,psi,sigma,R,alpha){ 
+mc_power = function(vars,Tobs_list,delta,psi,sigma,R,alpha){
 
   # Generate dataset
   df_pow = data.frame()
@@ -104,26 +101,26 @@ mc_power = function(vars,Tobs_list,delta,psi,sigma,R,alpha){
   for (i in 1:length(Tobs_list)){
     Tobs = Tobs_list[i]
     print(paste0("Power analysis for N = ", Tobs))
-    
+
     # R replicates for each sample size
     for (r in 1:R){
 
       # Generate VAR data
       data = sim_VAR_data(vars,Tobs,delta,psi,sigma)
 
-      # Create names list   
+      # Create names list
       var_names = sprintf("Y%d",seq(1:vars))
       lag_names = sprintf("Y%dlag",seq(1:vars))
 
       # Estimate models
       list_pow_rep = list()
 
-      for (nbName in 1:length(var_names)){        
+      for (nbName in 1:length(var_names)){
         name_ = var_names[nbName]
 
         # Create formula
         formula = as.formula(paste(name_ ,paste(lag_names, collapse = " + "), sep = " ~ "))
-        
+
         # Estimate model
         model = lm(formula, data)
 
@@ -160,12 +157,12 @@ To conduct the simulation-based power analysis you first need to set the followi
 
 - 'Tobs': list of numbers of repeated measurements.
 - 'vars': number of variables of the VAR(1) model.
-- 'delta': a vars*1 matrix with one intercept per variable. 
-- 'psi': a vars*vars matrix. The diagonal elements are the autoregressive coefficients, and the off-diagonal are the cross-regressive coefficients. 
-- 'sigma': a var*vars matrix. The diagonal elements are the variance of the residuals, and the off-diagonal elements are the covariance values. Note that the matrix should be symmetric. 
+- 'delta': a vars*1 matrix with one intercept per variable.
+- 'psi': a vars*vars matrix. The diagonal elements are the autoregressive coefficients, and the off-diagonal are the cross-regressive coefficients.
+- 'sigma': a var*vars matrix. The diagonal elements are the variance of the residuals, and the off-diagonal elements are the covariance values. Note that the matrix should be symmetric.
 - 'alpha': type I error rate (often .05).
 - 'R': number of Monte Carlo replicates (often 1000).
-- 'pow_target': the empirical power targeted, which is often .8. This variable is only used in the results (not in the simulation). 
+- 'pow_target': the empirical power targeted, which is often .8. This variable is only used in the results (not in the simulation).
 
 We demonstrate how to run this analysis with two examples: an AR(1) and a VAR(1) model.
 
@@ -188,12 +185,12 @@ $$
 
 ```{r , echo = TRUE}
 # Set the values for conducting the power analysis
-Tobs_list = c(50,100,150) 
+Tobs_list = c(50,100,150)
 vars = 1
 delta = as.matrix(3)
 psi = as.matrix(.3)
 sigma = as.matrix(10)
-alpha = 0.05 
+alpha = 0.05
 R = 1000
 
 pow_target = .8
@@ -208,10 +205,10 @@ Finally, we display the results of the power analysis in a plot and a recap tabl
 
 ```{r}
 # Plot the results of the power analysis
-dt = df_pow_result %>% 
+dt = df_pow_result %>%
         gather(Coef_power, power, starts_with("pow"))
-dt$Coef_power = stringr::str_replace_all(dt$Coef_power, c("pow_"="", "_"=" -> ")) # rename 
-ggplot() +   
+dt$Coef_power = stringr::str_replace_all(dt$Coef_power, c("pow_"="", "_"=" -> ")) # rename
+ggplot() +
         geom_line(data=dt, aes(y=power,x=Tobs, color=Coef_power)) +
         geom_hline(yintercept = pow_target, color="red", linetype=2) +
         scale_y_continuous(breaks=seq(0,1,by=.1), limits=c(0,1)) +
@@ -222,10 +219,10 @@ ggplot() +
 
 ```{r}
 # Create table of outputs
-dt = df_pow_result %>% 
+dt = df_pow_result %>%
         gather(pow,value,starts_with("pow")) %>%
         spread(Tobs, value)
-dt$pow = stringr::str_replace_all(dt$pow, c("pow_"="", "_"=" -> ")) # rename 
+dt$pow = stringr::str_replace_all(dt$pow, c("pow_"="", "_"=" -> ")) # rename
 names(dt)[1] = "Coefficients"
 dt
 ```
@@ -238,17 +235,17 @@ dt
 
 ## Example of a VAR(1) model with 3 variables
 
-We run a power analysis with Tobs = 50 and 100 and for a VAR(1) model with 3 variables as follows:  
+We run a power analysis with Tobs = 50 and 100 and for a VAR(1) model with 3 variables as follows:
 
 $$
-    \begin{bmatrix} y_{1t} \\ y_{2t} \\ y_{3t} \end{bmatrix} = 
-    \begin{bmatrix} 4 \\ 6 \\ 10 \end{bmatrix} + 
+    \begin{bmatrix} y_{1t} \\ y_{2t} \\ y_{3t} \end{bmatrix} =
+    \begin{bmatrix} 4 \\ 6 \\ 10 \end{bmatrix} +
     \begin{bmatrix} 0.5 \ 0.14 \ .2 \\ 0.1 \ 0.4 \ .03 \\ 0.05 \ 0.12 \ .6 \end{bmatrix}
-    \begin{bmatrix} y_{1, t-1} \\ y_{2, t-1} \\ y_{3, t-1} \end{bmatrix} + 
-    \begin{bmatrix} \varepsilon_{1t} \\ \varepsilon_{2t} \\ \varepsilon_{3t} \end{bmatrix} 
+    \begin{bmatrix} y_{1, t-1} \\ y_{2, t-1} \\ y_{3, t-1} \end{bmatrix} +
+    \begin{bmatrix} \varepsilon_{1t} \\ \varepsilon_{2t} \\ \varepsilon_{3t} \end{bmatrix}
 $$
 
-with: 
+with:
 
 $$
     \begin{bmatrix} \varepsilon_{1t} \\ \varepsilon_{2t} \\ \varepsilon_{3t} \end{bmatrix} \sim
@@ -257,7 +254,7 @@ $$$
 
 ```{r , echo = TRUE}
 # Set the values for conducting the power analysis
-Tobs_list = c(50, 100, 150) 
+Tobs_list = c(50, 100, 150)
 vars = 3
 delta = as.matrix(c(4,6,10))
 psi = as.matrix(rbind(c(.5, .14, .2),
@@ -266,7 +263,7 @@ psi = as.matrix(rbind(c(.5, .14, .2),
 sigma = as.matrix(rbind(c(15, 3, 6),
                         c(3, 20, 9),
                         c(6, 9, 18)))
-alpha = 0.05 
+alpha = 0.05
 R = 1000
 
 pow_target = .8
@@ -282,10 +279,10 @@ Finally, we display the results of the power analysis in a plot and a recap tabl
 
 ```{r}
 # Plot the results of the power analysis
-dt = df_pow_result %>% 
+dt = df_pow_result %>%
         gather(Coef_power, power, starts_with("pow"))
-dt$Coef_power = stringr::str_replace_all(dt$Coef_power, c("pow_"="", "_"=" -> ")) # rename 
-ggplot() +   
+dt$Coef_power = stringr::str_replace_all(dt$Coef_power, c("pow_"="", "_"=" -> ")) # rename
+ggplot() +
         geom_line(data=dt, aes(y=power,x=Tobs, color=Coef_power)) +
         geom_hline(yintercept = pow_target, color="red", linetype=2) +
         scale_y_continuous(breaks=seq(0,1,by=.1), limits=c(0,1)) +
@@ -296,10 +293,10 @@ ggplot() +
 
 ```{r}
 # Create table of outputs
-dt = df_pow_result %>% 
+dt = df_pow_result %>%
         gather(pow,value,starts_with("pow")) %>%
         spread(Tobs, value)
-dt$pow = stringr::str_replace_all(dt$pow, c("pow_"="", "_"=" -> ")) # rename 
+dt$pow = stringr::str_replace_all(dt$pow, c("pow_"="", "_"=" -> ")) # rename
 names(dt)[1] = "Coefficients"
 dt
 ```
