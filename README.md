@@ -81,8 +81,8 @@ version `4.1.2` or higher, `RStudio`, and the following `R` packages:
 
 ## Given At
 
-| Conference | Location                   | Date           | Link                                               |
-| ---------- | -------------------------- | -------------- | -------------------------------------------------- |
+| Conference | Location                   | Date           |                        Link                        |
+| :--------- | :------------------------- | :------------- | :------------------------------------------------: |
 | SAA 2023   | Amsterdam, The Netherlands | June 8th, 2023 | [link](https://www.saa2023.nl/amsterdam/workshops) |
 
 ## Presenters
