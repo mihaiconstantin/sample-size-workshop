@@ -16,6 +16,7 @@ website:
     immensely. The goal of this workshop is to address this crucial question by
     presenting methodological advances for sample size planning for intensive
     longitudinal designs.
+  site-url: "https://https://samplesize.help"
   twitter-card:
       title: "Sample Size Planning Workshop"
       description: |
@@ -37,7 +38,7 @@ website:
             text: Simulation-based power for $\text{AR}(1)$ and $\text{VAR}(1)$
           - href: exercises/sample-size-solutions-n-1.Rmd
             text: Sample size solutions for $N = 1$ intensive designs
-          - href: exercises/sample-size-analysis-ggm.md
+          - href: exercises/sample-size-analysis-ggm.qmd
             text: Sample size analysis for the $\text{GGM}$
           - href: exercise.md
             text: "..."
