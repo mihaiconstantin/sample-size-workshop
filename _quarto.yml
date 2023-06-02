@@ -5,8 +5,15 @@ project:
     - presenters/*
     - exercises/*
   execute-dir: project
+  output-dir: docs
 website:
   title: "Sample Size Planning"
+  description: |
+    In recent years the popularity of procedures to collect intensive
+    longitudinal data such as the Experience Sampling Method has increased
+    immensely. The goal of this workshop is to address this crucial question by
+    presenting methodological advances for sample size planning for intensive
+    longitudinal designs.
   navbar:
     left:
       - text: Slides
@@ -40,9 +47,10 @@ website:
             url:  https://github.com/mihaiconstantin/sample-size-workshop/issues
 format:
   html:
+    embed-resources: true
     grid:
       body-width: 900px
     theme:
       light: cosmo
     css: assets/css/styles.css
-    toc: true
+    toc: false

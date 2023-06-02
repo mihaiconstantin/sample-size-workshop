@@ -4,9 +4,7 @@ author:
   - Ginette Lafit (ginette.lafit@kuleuven.be)
   - Jordan Revol (jordan.revol@kuleuven.be)
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  html_document:
-    self_contained: true
+toc: true
 execute:
   freeze: auto
 ---
