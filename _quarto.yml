@@ -11,12 +11,8 @@ website:
     left:
       - text: Slides
         menu:
-          - href: slide-name-one.md
+          - href: slide.md
             text: The First Set of Slides
-          - href: slide-name-two.md
-            text: The Second Set of Slides
-          - href: slide-name-three.md
-            text: The Third Set of Slides
       - text: Exercises
         menu:
           - href: exercises/power-analysis-var-1.Rmd
