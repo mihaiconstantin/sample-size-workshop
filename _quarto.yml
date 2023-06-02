@@ -14,6 +14,13 @@ website:
     immensely. The goal of this workshop is to address this crucial question by
     presenting methodological advances for sample size planning for intensive
     longitudinal designs.
+  twitter-card:
+      title: "Sample Size Planning Workshop"
+      description: |
+        Methodological advances for sample size planning for intensive
+        longitudinal designs.
+      image: assets/images/website-card.jpg
+      site: https://samplesize.help
   navbar:
     left:
       - text: Home
