@@ -7,7 +7,7 @@ project:
   execute-dir: project
   output-dir: docs
 website:
-  title: "Sample Size Planning"
+  title: "Sample Size Help"
   description: |
     In recent years the popularity of procedures to collect intensive
     longitudinal data such as the Experience Sampling Method has increased
@@ -28,6 +28,8 @@ website:
             text: Simulation-based power for $\text{AR}(1)$ and $\text{VAR}(1)$
           - href: exercises/sample-size-solutions-n-1.Rmd
             text: Sample size solutions for $N = 1$ intensive designs
+          - href: exercises/sample-size-analysis-ggm.md
+            text: Sample size analysis for the $\text{GGM}$
           - href: exercise.md
             text: "..."
       - text: Presenters
