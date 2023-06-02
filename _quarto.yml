@@ -1,7 +1,7 @@
 project:
   type: website
   render:
-    - README.md
+    - index.md
     - presenters/*
     - exercises/*
   execute-dir: project
@@ -16,6 +16,8 @@ website:
     longitudinal designs.
   navbar:
     left:
+      - text: Home
+        href: index.md
       - text: Slides
         menu:
           - href: slide.md
