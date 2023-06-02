@@ -168,6 +168,13 @@
     "text": "Get the session info\nBelow we provide the session information (i.e., operating system, details about the R installation, and so on) for reproducibility purposes.\n\nsessionInfo()\n\nR version 4.3.0 (2023-04-21)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Ventura 13.3.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Amsterdam\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] MASS_7.3-58.4     lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0    \n [5] dplyr_1.1.2       purrr_1.0.1       readr_2.1.4       tidyr_1.3.0      \n [9] tibble_3.2.1      tidyverse_2.0.0   ggplot2_3.4.2     psych_2.3.3      \n[13] data.table_1.14.8\n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.3      jsonlite_1.8.4    compiler_4.3.0    tidyselect_1.2.0 \n [5] parallel_4.3.0    scales_1.2.1      yaml_2.3.7        fastmap_1.1.1    \n [9] lattice_0.21-8    R6_2.5.1          labeling_0.4.2    generics_0.1.3   \n[13] knitr_1.43        htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0     \n[17] tzdb_0.4.0        rlang_1.1.1       utf8_1.2.3        stringi_1.7.12   \n[21] xfun_0.39         timechange_0.2.0  cli_3.6.1         withr_2.5.0      \n[25] magrittr_2.0.3    digest_0.6.31     grid_4.3.0        rstudioapi_0.14  \n[29] hms_1.1.3         lifecycle_1.0.3   nlme_3.1-162      vctrs_0.6.2      \n[33] mnormt_2.1.1      evaluate_0.21     glue_1.6.2        farver_2.1.1     \n[37] fansi_1.0.4       colorspace_2.1-0  rmarkdown_2.22    tools_4.3.0      \n[41] pkgconfig_2.0.3   htmltools_0.5.5"
   },
   {
+    "objectID": "exercises/sample-size-analysis-ggm.html",
+    "href": "exercises/sample-size-analysis-ggm.html",
+    "title": "Sample Size Help",
+    "section": "",
+    "text": "To be added by Mihai, just for reference."
+  },
+  {
     "objectID": "exercises/sample-size-solutions-n-1.html",
     "href": "exercises/sample-size-solutions-n-1.html",
     "title": "Sample size solutions for \\(N = 1\\) intensive longitudinal designs",

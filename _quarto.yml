@@ -6,6 +6,8 @@ project:
     - exercises/*
   execute-dir: project
   output-dir: docs
+  resources:
+    - assets/images/website-card.jpg
 website:
   title: "Sample Size Help"
   description: |
@@ -17,9 +19,9 @@ website:
   twitter-card:
       title: "Sample Size Planning Workshop"
       description: |
-        Methodological advances for sample size planning for intensive
+        Methodological advances in sample size planning for intensive
         longitudinal designs.
-      image: assets/images/website-card.jpg
+      image: /assets/images/website-card.jpg
       site: https://samplesize.help
   navbar:
     left:
@@ -52,9 +54,9 @@ website:
     tools:
       - icon: github
         menu:
-          - text: Source Code and Materials
+          - text: Source code and materials
             url:  https://github.com/mihaiconstantin/sample-size-workshop
-          - text: Report an Issue
+          - text: Report an issue
             url:  https://github.com/mihaiconstantin/sample-size-workshop/issues
 format:
   html:
