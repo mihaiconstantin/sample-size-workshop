@@ -1,14 +1,3 @@
----
-toc: false
-output-file: index
-description: |
-    In recent years the popularity of procedures to collect intensive
-    longitudinal data such as the Experience Sampling Method has increased
-    immensely. The goal of this workshop is to address this crucial question by
-    presenting methodological advances for sample size planning for intensive
-    longitudinal designs.
----
-
 <!-- Repository title. -->
 <h1 align="center">
     Workshop on Sample Size Planning for
