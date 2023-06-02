@@ -40,14 +40,55 @@ $\text{VAR}(1)$ models in an $N = 1$ context, we introduce a novel approach,
 called predictive accuracy analysis, to assess how many measurement occasions
 are required in order to optimize predictive accuracy.
 
----
+## 📊 Learning Objectives
 
-<h3 align="center">
-    Check out the materials and more at <br>
-    <a href="https://samplesize.help">samplesize.help</a>
-</h3>
+The workshop provides a *road map* on how to determine the sample size in IL
+designs.
 
----
+Upon course completion, participants will:
+
+- be familiar with methods for conducting power analysis for $\text{AR}(1)$ and
+  $\text{VAR}(1)$ models in $N = 1$ intensive logitudinal designs
+- understand the different steps of the simulation-based power analysis approach
+- be able to implement existing tool for conducting power analysis for
+  $\text{AR}(1)$ and $\text{VAR}(1)$ models in $N = 1$ intensive logitudinal
+  designs
+- be familiar with an new methods for conducting sample size analysis based on
+  criteria different than statistical power (e.g., predictive accuracy or
+  sensitivity)
+
+## 💻 Prerequisites
+
+Participants should have some basic knowledge of `R` and some experience with
+`RStudio`. For the hands-on parts of the workshop, you need to install `R`
+version `4.1.2` or higher, `RStudio`, and the following `R` packages:
+
+- [`data.table`](https://CRAN.R-project.org/package=data.table)
+- [`psych`](https://CRAN.R-project.org/package=psych)
+- [`ggplot2`](https://CRAN.R-project.org/package=ggplot2)
+- [`tidyverse`](https://www.tidyverse.org/packages/)
+- [`powerly`](https://CRAN.R-project.org/package=powerly)
+
+## 📂 Modules
+
+::: {.callout-important title="To be updated"}
+We should update the modules to reflect the program changes.
+:::
+
+| Topic                        | Duration |      Slides      |     Tutorial     |
+| :--------------------------- | :------: | :--------------: | :--------------: |
+| Sample Size Planning         |   0.0h   | [link](https://) | [link](https://) |
+| $N = 1$: Introduction        |   0.0h   | [link](https://) | [link](https://) |
+| $N = 1$: Predictive Accuracy |   0.0h   | [link](https://) | [link](https://) |
+| Multilevel models            |   0.0h   | [link](https://) | [link](https://) |
+| Advanced methods             |   0.0h   | [link](https://) | [link](https://) |
+| Take home                    |   0.0h   | [link](https://) | [link](https://) |
+
+## 📍 Given At
+
+| Conference | Location                   | Date           |                        Link                        |
+| :--------- | :------------------------- | :------------- | :------------------------------------------------: |
+| SAA 2023   | Amsterdam, The Netherlands | June 8th, 2023 | [link](https://www.saa2023.nl/amsterdam/workshops) |
 
 ## ✍️ Citation
 
