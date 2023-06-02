@@ -1,0 +1,48 @@
+project:
+  type: website
+  render:
+    - README.md
+    - presenters/*
+    - exercises/*
+  execute-dir: project
+website:
+  title: "Sample Size Planning"
+  navbar:
+    left:
+      - text: Slides
+        menu:
+          - href: slide.md
+            text: The First Set of Slides
+      - text: Exercises
+        menu:
+          - href: exercises/power-analysis-var-1.Rmd
+            text: Simulation-based power for $\text{AR}(1)$ and $\text{VAR}(1)$
+          - href: exercises/sample-size-solutions-n-1.Rmd
+            text: Sample size solutions for $N = 1$ intensive designs
+          - href: exercise.md
+            text: "..."
+      - text: Presenters
+        menu:
+          - href: presenters/ginette-lafit.md
+            text: Ginette Lafit
+          - href: presenters/jordan-revol.md
+            text: Jordan Revol
+          - href: presenters/mihai-constantin.md
+            text: Mihai Constantin
+          - href: presenters/eva-ceulemans.md
+            text: Eva Ceulemans
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code and Materials
+            url:  https://github.com/mihaiconstantin/sample-size-workshop
+          - text: Report an Issue
+            url:  https://github.com/mihaiconstantin/sample-size-workshop/issues
+format:
+  html:
+    grid:
+      body-width: 900px
+    theme:
+      light: cosmo
+    css: assets/css/styles.css
+    toc: true
