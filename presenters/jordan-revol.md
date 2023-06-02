@@ -19,7 +19,7 @@ about:
 
 ## 🏛️
 
-PostDoc at KU Leuven in the Research Group of Quantitative Psychology and
+PhD candidate at KU Leuven in the Research Group of Quantitative Psychology and
 Individual Differences
 
 ## 🔍 Interests
