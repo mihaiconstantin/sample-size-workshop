@@ -5,6 +5,7 @@ project:
     - presenters/*
     - exercises/*
   execute-dir: project
+  output-dir: docs
 website:
   title: "Sample Size Planning"
   navbar:
