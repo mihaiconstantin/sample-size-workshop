@@ -1,56 +1,56 @@
 [
   {
-    "objectID": "README.html",
-    "href": "README.html",
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "",
     "text": "Workshop on Sample Size Planning for  Intensive Longitudinal Studies\nGinette Lafit, Jordan Revol, Mihai A. Constantin, & Eva Ceulemans"
   },
   {
-    "objectID": "README.html#description",
-    "href": "README.html#description",
+    "objectID": "index.html#description",
+    "href": "index.html#description",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📝 Description",
     "text": "📝 Description\nIn recent years the popularity of procedures to collect intensive longitudinal data such as the Experience Sampling Method has increased immensely. The data collected using such designs allow researchers to study the dynamics of psychological processes, and how these dynamics differ across individuals. A fundamental question when designing a study is how to determine the sample size, which is closely related to the replicability and generalizability of empirical findings. Even though multiple statistical guidelines are available for sample size planning, it still remains a demanding enterprise in complex designs. The goal of this workshop is to address this crucial question by presenting methodological advances for sample size planning for intensive longitudinal designs. First, we provide an overview of methods for sample size planning with special emphasis on a priori power analysis. Second, we focus on how to conduct power analysis in the \\(N = 1\\) case when the goal is to model within-person processes using \\(\\text{VAR}(1)\\) models. Subsequently, we consider the extension to multilevel data in which multiple individuals are measured over time. We introduce an approach for conducting power analysis for multilevel models that explicitly accounts for the temporal dependencies that characterize the data collected in IL studies. In addition, we showcase how to perform power analysis for these models using a user-friendly and open-source application. Finally, we consider an alternative criterion for conducting sample size planning that targets the predictive accuracy of a model for unseen data. Focusing on \\(\\text{VAR}(1)\\) models in an \\(N = 1\\) context, we introduce a novel approach, called predictive accuracy analysis, to assess how many measurement occasions are required in order to optimize predictive accuracy."
   },
   {
-    "objectID": "README.html#learning-objectives",
-    "href": "README.html#learning-objectives",
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📊 Learning Objectives",
     "text": "📊 Learning Objectives\nThe workshop provides a road map on how to determine the sample size in IL designs.\nUpon course completion, participants will:\n\nbe familiar with methods for conducting power analysis for \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models in \\(N = 1\\) intensive logitudinal designs\nunderstand the different steps of the simulation-based power analysis approach\nbe able to implement existing tool for conducting power analysis for \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models in \\(N = 1\\) intensive logitudinal designs\nbe familiar with an new methods for conducting sample size analysis based on criteria different than statistical power (e.g., predictive accuracy or sensitivity)"
   },
   {
-    "objectID": "README.html#prerequisites",
-    "href": "README.html#prerequisites",
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "💻 Prerequisites",
     "text": "💻 Prerequisites\nParticipants should have some basic knowledge of R and some experience with RStudio. For the hands-on parts of the workshop, you need to install R version 4.1.2 or higher, RStudio, and the following R packages:\n\ndata.table\npsych\nggplot2\ntidyverse\npowerly"
   },
   {
-    "objectID": "README.html#modules",
-    "href": "README.html#modules",
+    "objectID": "index.html#modules",
+    "href": "index.html#modules",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📂 Modules",
-    "text": "📂 Modules\n\n\n\nTopic\nDuration\nSlides\nTutorial\n\n\n\n\nSample Size Planning\n0.0h\nlink\nlink\n\n\n\\(N = 1\\): Introduction\n0.0h\nlink\nlink\n\n\n\\(N = 1\\): Predictive Accuracy\n0.0h\nlink\nlink\n\n\nMultilevel models\n0.0h\nlink\nlink\n\n\nAdvanced methods\n0.0h\nlink\nlink\n\n\nTake home\n0.0h\nlink\nlink"
+    "text": "📂 Modules\n\n\n\n\n\n\nTo be updated\n\n\n\nWe should update the modules to reflect the program changes.\n\n\n\n\n\nTopic\nDuration\nSlides\nTutorial\n\n\n\n\nSample Size Planning\n0.0h\nlink\nlink\n\n\n\\(N = 1\\): Introduction\n0.0h\nlink\nlink\n\n\n\\(N = 1\\): Predictive Accuracy\n0.0h\nlink\nlink\n\n\nMultilevel models\n0.0h\nlink\nlink\n\n\nAdvanced methods\n0.0h\nlink\nlink\n\n\nTake home\n0.0h\nlink\nlink"
   },
   {
-    "objectID": "README.html#given-at",
-    "href": "README.html#given-at",
+    "objectID": "index.html#given-at",
+    "href": "index.html#given-at",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📍 Given At",
     "text": "📍 Given At\n\n\n\nConference\nLocation\nDate\nLink\n\n\n\n\nSAA 2023\nAmsterdam, The Netherlands\nJune 8th, 2023\nlink"
   },
   {
-    "objectID": "README.html#citation",
-    "href": "README.html#citation",
+    "objectID": "index.html#citation",
+    "href": "index.html#citation",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "✍️ Citation",
     "text": "✍️ Citation\n\nLafit, G., Revol, J., Constantin M. A., & Ceulemans, E. (2023). Workshop on Sample Size Planning for Intensive Longitudinal Studies. https://00.0000/zenodo.0000000"
   },
   {
-    "objectID": "README.html#license",
-    "href": "README.html#license",
+    "objectID": "index.html#license",
+    "href": "index.html#license",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "⚖️ License",
     "text": "⚖️ License\n\n\nThe scripts, slides, and other materials by Ginette Lafit, Jordan Revol, Mihai A. Constantin, and Eva Ceulemans are licensed under CC BY 4.0  ."
