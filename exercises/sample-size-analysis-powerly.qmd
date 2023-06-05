@@ -1,5 +1,5 @@
 ---
-title: "Sample size analysis for the $\\text{GGM}$"
+title: "Sample size analysis using `powerly`"
 author:
   - Mihai A. Constantin
 date: today
