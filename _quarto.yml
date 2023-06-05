@@ -23,7 +23,7 @@ website:
       description: |
         Methodological advances in sample size planning for intensive
         longitudinal designs.
-      image: "https://i.imgur.com/IlKR0Tp.jpeg"
+      image: "/assets/images/website-card.jpg"
       site: https://samplesize.help
       card-style: summary
   navbar:
