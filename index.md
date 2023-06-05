@@ -79,18 +79,18 @@ the `Shiny` applications below:
 
 ## 📂 Modules
 
-| Topic                                                                                | Duration |          Slides          |                                                      Tutorial                                                      |
-| :----------------------------------------------------------------------------------- | :------: | :----------------------: | :----------------------------------------------------------------------------------------------------------------: |
-| Introduction to sample size planning in intensive longitudinal research              |   45m    | [link][slides-intensive] |                                                         -                                                          |
-| Sample size planning for $\text{VAR}(1)$ models in $N = 1$ designs                   |   60m    | [link][slides-intensive] | [exercise one link][exercise-simulation-power-analysis-ar-var], [exercise two link][exercise-solutions-n1-designs] |
-| Sample size planning for multilevel models applied to intensive longitudinal designs |   50m    | [link][slides-intensive] |      [exercise one link][exercise-simulation-multilevel], [exercise two link][exercise-analytical-multilevel]      |
-| Advanced methods for sample size analysis                                            |   40m    | [link][slides-advanced]  |                                     [exercise link][exercise-advanced-powerly]                                     |
+| Topic                                                                                | Duration |                                   Slides                                    |                                                                                                   Tutorial                                                                                                    |
+| :----------------------------------------------------------------------------------- | :------: | :-------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Introduction to sample size planning in intensive longitudinal research              |   45m    | [<span class="badge rounded-pill bg-primary">link</span>][slides-intensive] |                                                                                                       -                                                                                                       |
+| Sample size planning for $\text{VAR}(1)$ models in $N = 1$ designs                   |   60m    | [<span class="badge rounded-pill bg-primary">link</span>][slides-intensive] | [<span class="badge rounded-pill bg-primary">exercise one</span>][exercise-simulation-power-analysis-ar-var] [<span class="badge rounded-pill bg-primary">exercise two</span>][exercise-solutions-n1-designs] |
+| Sample size planning for multilevel models applied to intensive longitudinal designs |   50m    | [<span class="badge rounded-pill bg-primary">link</span>][slides-intensive] |      [<span class="badge rounded-pill bg-primary">exercise one</span>][exercise-simulation-multilevel] [<span class="badge rounded-pill bg-primary">exercise two</span>][exercise-analytical-multilevel]      |
+| Advanced methods for sample size analysis                                            |   40m    | [<span class="badge rounded-pill bg-primary">link</span>][slides-advanced]  |                                                           [<span class="badge rounded-pill bg-primary">exercise</span>][exercise-advanced-powerly]                                                            |
 
 ## 📍 Given At
 
-| Conference | Location                   | Date           |                        Link                        |
-| :--------- | :------------------------- | :------------- | :------------------------------------------------: |
-| SAA 2023   | Amsterdam, The Netherlands | June 8th, 2023 | [link](https://www.saa2023.nl/amsterdam/workshops) |
+| Conference | Location                   | Date           |                                                 Link                                                  |
+| :--------- | :------------------------- | :------------- | :---------------------------------------------------------------------------------------------------: |
+| SAA 2023   | Amsterdam, The Netherlands | June 8th, 2023 | [<span class="badge rounded-pill bg-success">link</span>](https://www.saa2023.nl/amsterdam/workshops) |
 
 ## ✍️ Citation
 
