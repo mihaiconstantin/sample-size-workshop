@@ -4,6 +4,7 @@ project:
     - index.md
     - presenters/*
     - exercises/*
+    - slides/*
   execute-dir: project
   output-dir: docs
   resources:
