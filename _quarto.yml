@@ -25,6 +25,7 @@ website:
         longitudinal designs.
       image: "https://i.imgur.com/IlKR0Tp.jpeg"
       site: https://samplesize.help
+      card-style: summary
   navbar:
     left:
       - text: Home
