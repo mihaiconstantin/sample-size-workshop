@@ -4568,6 +4568,9 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 border-radius: 0.5rem;
 padding: 0.5rem;
 }
+#modules table, #given-at table {
+vertical-align: middle;
+}
 </style>
 <meta name="twitter:title" content="Sample Size Planning Workshop">
 <meta name="twitter:description" content="Methodological advances in sample size planning for intensive longitudinal designs.">
@@ -4603,8 +4606,12 @@ padding: 0.5rem;
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-slides">    
         <li>
-    <a class="dropdown-item" href="./slide.md" rel target>
- <span class="dropdown-text">The First Set of Slides</span></a>
+    <a class="dropdown-item" href="./slides/slides.html" rel target>
+ <span class="dropdown-text">Sample size planning for intensive longitudinal designs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./slides/slides.html" rel target>
+ <span class="dropdown-text">Advanced methods for sample size planning</span></a>
   </li>  
     </ul>
   </li>
@@ -4622,12 +4629,16 @@ padding: 0.5rem;
  <span class="dropdown-text">Sample size solutions for <span class="math inline">\(N = 1\)</span> intensive designs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exercises/sample-size-analysis-ggm.html" rel target>
- <span class="dropdown-text">Sample size analysis for the <span class="math inline">\(\text{GGM}\)</span></span></a>
+    <a class="dropdown-item" href="./exercises/exercises.html" rel target>
+ <span class="dropdown-text">Simulation-based power analysis for multilevel models</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exercise.md" rel target>
- <span class="dropdown-text">…</span></a>
+    <a class="dropdown-item" href="./exercises/exercises.html" rel target>
+ <span class="dropdown-text">Analytical-based power analysis for multilevel models</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./exercises/sample-size-analysis-powerly.html" rel target>
+ <span class="dropdown-text">Sample size analysis using <code>powerly</code></span></a>
   </li>  
     </ul>
   </li>
@@ -4696,16 +4707,16 @@ Workshop on Sample Size Planning for <br> Intensive Longitudinal Studies
 </p>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">📝 Description</h2>
-<p>In recent years the popularity of procedures to collect intensive longitudinal data such as the Experience Sampling Method has increased immensely. The data collected using such designs allow researchers to study the dynamics of psychological processes, and how these dynamics differ across individuals. A fundamental question when designing a study is how to determine the sample size, which is closely related to the replicability and generalizability of empirical findings. Even though multiple statistical guidelines are available for sample size planning, it still remains a demanding enterprise in complex designs. The goal of this workshop is to address this crucial question by presenting methodological advances for sample size planning for intensive longitudinal designs. First, we provide an overview of methods for sample size planning with special emphasis on a priori power analysis. Second, we focus on how to conduct power analysis in the <span class="math inline">\(N = 1\)</span> case when the goal is to model within-person processes using <span class="math inline">\(\text{VAR}(1)\)</span> models. Subsequently, we consider the extension to multilevel data in which multiple individuals are measured over time. We introduce an approach for conducting power analysis for multilevel models that explicitly accounts for the temporal dependencies that characterize the data collected in IL studies. In addition, we showcase how to perform power analysis for these models using a user-friendly and open-source application. Finally, we consider an alternative criterion for conducting sample size planning that targets the predictive accuracy of a model for unseen data. Focusing on <span class="math inline">\(\text{VAR}(1)\)</span> models in an <span class="math inline">\(N = 1\)</span> context, we introduce a novel approach, called predictive accuracy analysis, to assess how many measurement occasions are required in order to optimize predictive accuracy.</p>
+<p>In recent years the popularity of procedures to collect intensive longitudinal data such as the Experience Sampling Method has increased immensely. The data collected using such designs allow researchers to study the dynamics of psychological processes, and how these dynamics differ across individuals. A fundamental question when designing a study is how to determine the sample size, which is closely related to the replicability and generalizability of empirical findings. Even though multiple statistical guidelines are available for sample size planning, it still remains a demanding enterprise in complex designs. The goal of this workshop is to address this crucial question by presenting methodological advances for sample size planning for intensive longitudinal designs. First, we provide an overview of methods for sample size planning with special emphasis on a priori power analysis. Second, we focus on how to conduct power analysis in the <span class="math inline">\(N = 1\)</span> case when the goal is to model within-person processes using <span class="math inline">\(\text{VAR}(1)\)</span> models. Subsequently, we consider the extension to multilevel data in which multiple individuals are measured over time. We introduce an approach for conducting power analysis for multilevel models that explicitly accounts for the temporal dependencies that characterize the data collected in intensive longitudinal studies. In addition, we showcase how to perform power analysis for these models using a user-friendly and open-source application. Finally, we consider an alternative criterion for conducting sample size planning that targets the predictive accuracy of a model for unseen data. Focusing on <span class="math inline">\(\text{VAR}(1)\)</span> models in an <span class="math inline">\(N = 1\)</span> context, we introduce a novel approach, called predictive accuracy analysis, to assess how many measurement occasions are required in order to optimize predictive accuracy.</p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">📊 Learning Objectives</h2>
 <p>The workshop provides a <em>road map</em> on how to determine the sample size in IL designs.</p>
 <p>Upon course completion, participants will:</p>
 <ul>
-<li>be familiar with methods for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> intensive logitudinal designs</li>
+<li>be familiar with methods for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> intensive longitudinal designs</li>
 <li>understand the different steps of the simulation-based power analysis approach</li>
-<li>be able to implement existing tool for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> intensive logitudinal designs</li>
+<li>be able to implement existing tool for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> intensive longitudinal designs</li>
 <li>be familiar with an new methods for conducting sample size analysis based on criteria different than statistical power (e.g., predictive accuracy or sensitivity)</li>
 </ul>
 </section>
@@ -4715,26 +4726,19 @@ Workshop on Sample Size Planning for <br> Intensive Longitudinal Studies
 <ul>
 <li><a href="https://CRAN.R-project.org/package=data.table"><code>data.table</code></a></li>
 <li><a href="https://CRAN.R-project.org/package=psych"><code>psych</code></a></li>
-<li><a href="https://CRAN.R-project.org/package=ggplot2"><code>ggplot2</code></a></li>
+<li><a href="https://CRAN.R-project.org/package=MASS"><code>psych</code></a></li>
 <li><a href="https://www.tidyverse.org/packages/"><code>tidyverse</code></a></li>
-<li><a href="https://CRAN.R-project.org/package=powerly"><code>powerly</code></a></li>
+<li><a href="https://powerly.dev"><code>powerly</code></a></li>
+</ul>
+<p>Some exercises in this workshop also involve using <code>Shiny</code> applications to run power analysis. You can find additional instructions on how to download and run the <code>Shiny</code> applications below:</p>
+<ul>
+<li>for <a href="https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0148925/shinyapp-paa_var_n1">Predictive Accuracy Analysis and power analysis for the <span class="math inline">\(\text{VAR}(1)\)</span></a></li>
+<li>for <a href="https://github.com/ginettelafit/PowerAnalysisIL">power analysis for multilevel models using the simulation-based approach</a></li>
+<li>for <a href="https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0119584/ApproxPowerIL">power analysis for multilevel models using the analytic approach</a></li>
 </ul>
 </section>
 <section id="modules" class="level2">
 <h2 class="anchored" data-anchor-id="modules">📂 Modules</h2>
-<div class="callout callout-style-default callout-important callout-titled" title="To be updated">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-To be updated
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We should update the modules to reflect the program changes.</p>
-</div>
-</div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -4746,40 +4750,28 @@ To be updated
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Sample Size Planning</td>
-<td style="text-align: center;">0.0h</td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-<td style="text-align: center;"><a href="https://">link</a></td>
+<td style="text-align: left;">Introduction to sample size planning in intensive longitudinal research</td>
+<td style="text-align: center;">45m</td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
+<td style="text-align: center;">-</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><span class="math inline">\(N = 1\)</span>: Introduction</td>
-<td style="text-align: center;">0.0h</td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-<td style="text-align: center;"><a href="https://">link</a></td>
+<td style="text-align: left;">Sample size planning for <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> designs</td>
+<td style="text-align: center;">60m</td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
+<td style="text-align: center;"><a href="./exercises/power-analysis-var-1.html"><span class="badge rounded-pill bg-primary">exercise one</span></a> <a href="./exercises/sample-size-solutions-n-1.html"><span class="badge rounded-pill bg-primary">exercise two</span></a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(N = 1\)</span>: Predictive Accuracy</td>
-<td style="text-align: center;">0.0h</td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-<td style="text-align: center;"><a href="https://">link</a></td>
+<td style="text-align: left;">Sample size planning for multilevel models applied to intensive longitudinal designs</td>
+<td style="text-align: center;">50m</td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
+<td style="text-align: center;"><a href="./exercises/exercises.html"><span class="badge rounded-pill bg-primary">exercise one</span></a> <a href="./exercises/exercises.html"><span class="badge rounded-pill bg-primary">exercise two</span></a></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Multilevel models</td>
-<td style="text-align: center;">0.0h</td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Advanced methods</td>
-<td style="text-align: center;">0.0h</td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Take home</td>
-<td style="text-align: center;">0.0h</td>
-<td style="text-align: center;"><a href="https://">link</a></td>
-<td style="text-align: center;"><a href="https://">link</a></td>
+<td style="text-align: left;">Advanced methods for sample size analysis</td>
+<td style="text-align: center;">40m</td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
+<td style="text-align: center;"><a href="./exercises/sample-size-analysis-powerly.html"><span class="badge rounded-pill bg-primary">exercise</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -4800,7 +4792,7 @@ To be updated
 <td style="text-align: left;">SAA 2023</td>
 <td style="text-align: left;">Amsterdam, The Netherlands</td>
 <td style="text-align: left;">June 8th, 2023</td>
-<td style="text-align: center;"><a href="https://www.saa2023.nl/amsterdam/workshops">link</a></td>
+<td style="text-align: center;"><a href="https://www.saa2023.nl/amsterdam/workshops"><span class="badge rounded-pill bg-success">link</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -4818,6 +4810,9 @@ To be updated
 <a property="dct:title" rel="cc:attributionURL" href="https://github.com/mihaiconstantin/sample-size-workshop">The scripts, slides, and other materials</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/mihaiconstantin/sample-size-workshop#citation">Ginette Lafit, Jordan Revol, Mihai A. Constantin, and Eva Ceulemans</a> are licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0 <img style="height:22px!important" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxMy4wLjIsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDE0OTQ4KSAgLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMC8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMCIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNjRweCIgaGVpZ2h0PSI2NHB4IiB2aWV3Qm94PSI1LjUgLTMuNSA2NCA2NCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyA1LjUgLTMuNSA2NCA2NCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8Y2lyY2xlIGZpbGw9IiNGRkZGRkYiIGN4PSIzNy43ODUiIGN5PSIyOC41MDEiIHI9IjI4LjgzNiIvPg0KCTxwYXRoIGQ9Ik0zNy40NDEtMy41YzguOTUxLDAsMTYuNTcyLDMuMTI1LDIyLjg1Nyw5LjM3MmMzLjAwOCwzLjAwOSw1LjI5NSw2LjQ0OCw2Ljg1NywxMC4zMTQNCgkJYzEuNTYxLDMuODY3LDIuMzQ0LDcuOTcxLDIuMzQ0LDEyLjMxNGMwLDQuMzgxLTAuNzczLDguNDg2LTIuMzE0LDEyLjMxM2MtMS41NDMsMy44MjgtMy44Miw3LjIxLTYuODI4LDEwLjE0Mw0KCQljLTMuMTIzLDMuMDg1LTYuNjY2LDUuNDQ4LTEwLjYyOSw3LjA4NmMtMy45NjEsMS42MzgtOC4wNTcsMi40NTctMTIuMjg1LDIuNDU3cy04LjI3Ni0wLjgwOC0xMi4xNDMtMi40MjkNCgkJYy0zLjg2Ni0xLjYxOC03LjMzMy0zLjk2MS0xMC40LTcuMDI3Yy0zLjA2Ny0zLjA2Ni01LjQtNi41MjQtNy0xMC4zNzJTNS41LDMyLjc2Nyw1LjUsMjguNWMwLTQuMjI5LDAuODA5LTguMjk1LDIuNDI4LTEyLjINCgkJYzEuNjE5LTMuOTA1LDMuOTcyLTcuNCw3LjA1Ny0xMC40ODZDMjEuMDgtMC4zOTQsMjguNTY1LTMuNSwzNy40NDEtMy41eiBNMzcuNTU3LDIuMjcyYy03LjMxNCwwLTEzLjQ2NywyLjU1My0xOC40NTgsNy42NTcNCgkJYy0yLjUxNSwyLjU1My00LjQ0OCw1LjQxOS01LjgsOC42Yy0xLjM1NCwzLjE4MS0yLjAyOSw2LjUwNS0yLjAyOSw5Ljk3MmMwLDMuNDI5LDAuNjc1LDYuNzM0LDIuMDI5LDkuOTEzDQoJCWMxLjM1MywzLjE4MywzLjI4NSw2LjAyMSw1LjgsOC41MTZjMi41MTQsMi40OTYsNS4zNTEsNC4zOTksOC41MTUsNS43MTVjMy4xNjEsMS4zMTQsNi40NzYsMS45NzEsOS45NDMsMS45NzENCgkJYzMuNDI4LDAsNi43NS0wLjY2NSw5Ljk3My0xLjk5OWMzLjIxOS0xLjMzNSw2LjEyMS0zLjI1Nyw4LjcxMy01Ljc3MWM0Ljk5LTQuODc2LDcuNDg0LTEwLjk5LDcuNDg0LTE4LjM0NA0KCQljMC0zLjU0My0wLjY0OC02Ljg5NS0xLjk0My0xMC4wNTdjLTEuMjkzLTMuMTYyLTMuMTgtNS45OC01LjY1NC04LjQ1OEM1MC45ODQsNC44NDQsNDQuNzk1LDIuMjcyLDM3LjU1NywyLjI3MnogTTM3LjE1NiwyMy4xODcNCgkJbC00LjI4NywyLjIyOWMtMC40NTgtMC45NTEtMS4wMTktMS42MTktMS42ODUtMmMtMC42NjctMC4zOC0xLjI4Ni0wLjU3MS0xLjg1OC0wLjU3MWMtMi44NTYsMC00LjI4NiwxLjg4NS00LjI4Niw1LjY1Nw0KCQljMCwxLjcxNCwwLjM2MiwzLjA4NCwxLjA4NSw0LjExM2MwLjcyNCwxLjAyOSwxLjc5MSwxLjU0NCwzLjIwMSwxLjU0NGMxLjg2NywwLDMuMTgxLTAuOTE1LDMuOTQ0LTIuNzQzbDMuOTQyLDINCgkJYy0wLjgzOCwxLjU2My0yLDIuNzkxLTMuNDg2LDMuNjg2Yy0xLjQ4NCwwLjg5Ni0zLjEyMywxLjM0My00LjkxNCwxLjM0M2MtMi44NTcsMC01LjE2My0wLjg3NS02LjkxNS0yLjYyOQ0KCQljLTEuNzUyLTEuNzUyLTIuNjI4LTQuMTktMi42MjgtNy4zMTNjMC0zLjA0OCwwLjg4Ni01LjQ2NiwyLjY1Ny03LjI1N2MxLjc3MS0xLjc5LDQuMDA5LTIuNjg2LDYuNzE1LTIuNjg2DQoJCUMzMi42MDQsMTguNTU4LDM1LjQ0MSwyMC4xMDEsMzcuMTU2LDIzLjE4N3ogTTU1LjYxMywyMy4xODdsLTQuMjI5LDIuMjI5Yy0wLjQ1Ny0wLjk1MS0xLjAyLTEuNjE5LTEuNjg2LTINCgkJYy0wLjY2OC0wLjM4LTEuMzA3LTAuNTcxLTEuOTE0LTAuNTcxYy0yLjg1NywwLTQuMjg3LDEuODg1LTQuMjg3LDUuNjU3YzAsMS43MTQsMC4zNjMsMy4wODQsMS4wODYsNC4xMTMNCgkJYzAuNzIzLDEuMDI5LDEuNzg5LDEuNTQ0LDMuMjAxLDEuNTQ0YzEuODY1LDAsMy4xOC0wLjkxNSwzLjk0MS0yLjc0M2w0LDJjLTAuODc1LDEuNTYzLTIuMDU3LDIuNzkxLTMuNTQxLDMuNjg2DQoJCWMtMS40ODYsMC44OTYtMy4xMDUsMS4zNDMtNC44NTcsMS4zNDNjLTIuODk2LDAtNS4yMDktMC44NzUtNi45NDEtMi42MjljLTEuNzM2LTEuNzUyLTIuNjAyLTQuMTktMi42MDItNy4zMTMNCgkJYzAtMy4wNDgsMC44ODUtNS40NjYsMi42NTgtNy4yNTdjMS43Ny0xLjc5LDQuMDA4LTIuNjg2LDYuNzEzLTIuNjg2QzUxLjExNywxOC41NTgsNTMuOTM4LDIwLjEwMSw1NS42MTMsMjMuMTg3eiIvPg0KPC9nPg0KPC9zdmc+DQo="> <img style="height:22px!important" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxMy4wLjIsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDE0OTQ4KSAgLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMC8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMCIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNjRweCIgaGVpZ2h0PSI2NHB4IiB2aWV3Qm94PSI1LjUgLTMuNSA2NCA2NCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyA1LjUgLTMuNSA2NCA2NCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8Y2lyY2xlIGZpbGw9IiNGRkZGRkYiIGN4PSIzNy42MzciIGN5PSIyOC44MDYiIHI9IjI4LjI3NiIvPg0KCTxnPg0KCQk8cGF0aCBkPSJNMzcuNDQzLTMuNWM4Ljk4OCwwLDE2LjU3LDMuMDg1LDIyLjc0Miw5LjI1N0M2Ni4zOTMsMTEuOTY3LDY5LjUsMTkuNTQ4LDY5LjUsMjguNWMwLDguOTkxLTMuMDQ5LDE2LjQ3Ni05LjE0NSwyMi40NTYNCgkJCUM1My44NzksNTcuMzE5LDQ2LjI0Miw2MC41LDM3LjQ0Myw2MC41Yy04LjY0OSwwLTE2LjE1My0zLjE0NC0yMi41MTQtOS40M0M4LjY0NCw0NC43ODQsNS41LDM3LjI2Miw1LjUsMjguNQ0KCQkJYzAtOC43NjEsMy4xNDQtMTYuMzQyLDkuNDI5LTIyLjc0MkMyMS4xMDEtMC40MTUsMjguNjA0LTMuNSwzNy40NDMtMy41eiBNMzcuNTU3LDIuMjcyYy03LjI3NiwwLTEzLjQyOCwyLjU1My0xOC40NTcsNy42NTcNCgkJCWMtNS4yMiw1LjMzNC03LjgyOSwxMS41MjUtNy44MjksMTguNTcyYzAsNy4wODYsMi41OSwxMy4yMiw3Ljc3LDE4LjM5OGM1LjE4MSw1LjE4MiwxMS4zNTIsNy43NzEsMTguNTE0LDcuNzcxDQoJCQljNy4xMjMsMCwxMy4zMzQtMi42MDcsMTguNjI5LTcuODI4YzUuMDI5LTQuODM4LDcuNTQzLTEwLjk1Miw3LjU0My0xOC4zNDNjMC03LjI3Ni0yLjU1My0xMy40NjUtNy42NTYtMTguNTcxDQoJCQlDNTAuOTY3LDQuODI0LDQ0Ljc5NSwyLjI3MiwzNy41NTcsMi4yNzJ6IE00Ni4xMjksMjAuNTU3djEzLjA4NWgtMy42NTZ2MTUuNTQyaC05Ljk0NFYzMy42NDNoLTMuNjU2VjIwLjU1Nw0KCQkJYzAtMC41NzIsMC4yLTEuMDU3LDAuNTk5LTEuNDU3YzAuNDAxLTAuMzk5LDAuODg3LTAuNiwxLjQ1Ny0wLjZoMTMuMTQ0YzAuNTMzLDAsMS4wMSwwLjIsMS40MjgsMC42DQoJCQlDNDUuOTE4LDE5LjUsNDYuMTI5LDE5Ljk4Niw0Ni4xMjksMjAuNTU3eiBNMzMuMDQyLDEyLjMyOWMwLTMuMDA4LDEuNDg1LTQuNTE0LDQuNDU4LTQuNTE0czQuNDU3LDEuNTA0LDQuNDU3LDQuNTE0DQoJCQljMCwyLjk3MS0xLjQ4Niw0LjQ1Ny00LjQ1Nyw0LjQ1N1MzMy4wNDIsMTUuMywzMy4wNDIsMTIuMzI5eiIvPg0KCTwvZz4NCjwvZz4NCjwvc3ZnPg0K"></a>.
 </p></li>
 </ul>
+<!-- Reference links. -->
+<!-- Slide links. -->
+<!-- Exercise links. -->
 
 
 </section>

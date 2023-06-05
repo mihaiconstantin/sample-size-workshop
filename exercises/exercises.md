@@ -1,7 +1,10 @@
 ---
-title: "Sample size analysis for the $\\text{GGM}$"
+title: "Coming soon"
 author:
+  - Ginette Lafit
+  - Jordan Revol
   - Mihai A. Constantin
+  - Eva Ceulemans
 date: today
 toc: true
 format:
@@ -11,4 +14,4 @@ execute:
   freeze: auto
 ---
 
-To be added by Mihai, just for reference.
+*Coming soon.*

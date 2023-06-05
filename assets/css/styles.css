@@ -19,3 +19,7 @@ main.content {
     border-radius: 0.5rem;
     padding: 0.5rem;
 }
+
+#modules table, #given-at table {
+    vertical-align: middle;
+}
