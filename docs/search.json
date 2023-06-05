@@ -11,28 +11,28 @@
     "href": "index.html#description",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📝 Description",
-    "text": "📝 Description\nIn recent years the popularity of procedures to collect intensive longitudinal data such as the Experience Sampling Method has increased immensely. The data collected using such designs allow researchers to study the dynamics of psychological processes, and how these dynamics differ across individuals. A fundamental question when designing a study is how to determine the sample size, which is closely related to the replicability and generalizability of empirical findings. Even though multiple statistical guidelines are available for sample size planning, it still remains a demanding enterprise in complex designs. The goal of this workshop is to address this crucial question by presenting methodological advances for sample size planning for intensive longitudinal designs. First, we provide an overview of methods for sample size planning with special emphasis on a priori power analysis. Second, we focus on how to conduct power analysis in the \\(N = 1\\) case when the goal is to model within-person processes using \\(\\text{VAR}(1)\\) models. Subsequently, we consider the extension to multilevel data in which multiple individuals are measured over time. We introduce an approach for conducting power analysis for multilevel models that explicitly accounts for the temporal dependencies that characterize the data collected in IL studies. In addition, we showcase how to perform power analysis for these models using a user-friendly and open-source application. Finally, we consider an alternative criterion for conducting sample size planning that targets the predictive accuracy of a model for unseen data. Focusing on \\(\\text{VAR}(1)\\) models in an \\(N = 1\\) context, we introduce a novel approach, called predictive accuracy analysis, to assess how many measurement occasions are required in order to optimize predictive accuracy."
+    "text": "📝 Description\nIn recent years the popularity of procedures to collect intensive longitudinal data such as the Experience Sampling Method has increased immensely. The data collected using such designs allow researchers to study the dynamics of psychological processes, and how these dynamics differ across individuals. A fundamental question when designing a study is how to determine the sample size, which is closely related to the replicability and generalizability of empirical findings. Even though multiple statistical guidelines are available for sample size planning, it still remains a demanding enterprise in complex designs. The goal of this workshop is to address this crucial question by presenting methodological advances for sample size planning for intensive longitudinal designs. First, we provide an overview of methods for sample size planning with special emphasis on a priori power analysis. Second, we focus on how to conduct power analysis in the \\(N = 1\\) case when the goal is to model within-person processes using \\(\\text{VAR}(1)\\) models. Subsequently, we consider the extension to multilevel data in which multiple individuals are measured over time. We introduce an approach for conducting power analysis for multilevel models that explicitly accounts for the temporal dependencies that characterize the data collected in intensive longitudinal studies. In addition, we showcase how to perform power analysis for these models using a user-friendly and open-source application. Finally, we consider an alternative criterion for conducting sample size planning that targets the predictive accuracy of a model for unseen data. Focusing on \\(\\text{VAR}(1)\\) models in an \\(N = 1\\) context, we introduce a novel approach, called predictive accuracy analysis, to assess how many measurement occasions are required in order to optimize predictive accuracy."
   },
   {
     "objectID": "index.html#learning-objectives",
     "href": "index.html#learning-objectives",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📊 Learning Objectives",
-    "text": "📊 Learning Objectives\nThe workshop provides a road map on how to determine the sample size in IL designs.\nUpon course completion, participants will:\n\nbe familiar with methods for conducting power analysis for \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models in \\(N = 1\\) intensive logitudinal designs\nunderstand the different steps of the simulation-based power analysis approach\nbe able to implement existing tool for conducting power analysis for \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models in \\(N = 1\\) intensive logitudinal designs\nbe familiar with an new methods for conducting sample size analysis based on criteria different than statistical power (e.g., predictive accuracy or sensitivity)"
+    "text": "📊 Learning Objectives\nThe workshop provides a road map on how to determine the sample size in IL designs.\nUpon course completion, participants will:\n\nbe familiar with methods for conducting power analysis for \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models in \\(N = 1\\) intensive longitudinal designs\nunderstand the different steps of the simulation-based power analysis approach\nbe able to implement existing tool for conducting power analysis for \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models in \\(N = 1\\) intensive longitudinal designs\nbe familiar with an new methods for conducting sample size analysis based on criteria different than statistical power (e.g., predictive accuracy or sensitivity)"
   },
   {
     "objectID": "index.html#prerequisites",
     "href": "index.html#prerequisites",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "💻 Prerequisites",
-    "text": "💻 Prerequisites\nParticipants should have some basic knowledge of R and some experience with RStudio. For the hands-on parts of the workshop, you need to install R version 4.1.2 or higher, RStudio, and the following R packages:\n\ndata.table\npsych\nggplot2\ntidyverse\npowerly"
+    "text": "💻 Prerequisites\nParticipants should have some basic knowledge of R and some experience with RStudio. For the hands-on parts of the workshop, you need to install R version 4.1.2 or higher, RStudio, and the following R packages:\n\ndata.table\npsych\npsych\ntidyverse\npowerly\n\nSome exercises in this workshop also involve using Shiny applications to run power analysis. You can find additional instructions on how to download and run the Shiny applications below:\n\nfor Predictive Accuracy Analysis and power analysis for the \\(\\text{VAR}(1)\\)\nfor power analysis for multilevel models using the simulation-based approach\nfor power analysis for multilevel models using the analytic approach"
   },
   {
     "objectID": "index.html#modules",
     "href": "index.html#modules",
     "title": "\nWorkshop on Sample Size Planning for  Intensive Longitudinal Studies\n",
     "section": "📂 Modules",
-    "text": "📂 Modules\n\n\n\n\n\n\nTo be updated\n\n\n\nWe should update the modules to reflect the program changes.\n\n\n\n\n\nTopic\nDuration\nSlides\nTutorial\n\n\n\n\nSample Size Planning\n0.0h\nlink\nlink\n\n\n\\(N = 1\\): Introduction\n0.0h\nlink\nlink\n\n\n\\(N = 1\\): Predictive Accuracy\n0.0h\nlink\nlink\n\n\nMultilevel models\n0.0h\nlink\nlink\n\n\nAdvanced methods\n0.0h\nlink\nlink\n\n\nTake home\n0.0h\nlink\nlink"
+    "text": "📂 Modules\n\n\n\nTopic\nDuration\nSlides\nTutorial\n\n\n\n\nIntroduction to sample size planning in intensive longitudinal research\n45m\nlink\n-\n\n\nSample size planning for \\(\\text{VAR}(1)\\) models in \\(N = 1\\) designs\n60m\nlink\nexercise one exercise two\n\n\nSample size planning for multilevel models applied to intensive longitudinal designs\n50m\nlink\nexercise one exercise two\n\n\nAdvanced methods for sample size analysis\n40m\nlink\nexercise"
   },
   {
     "objectID": "index.html#given-at",
@@ -133,6 +133,13 @@
     "text": "🔍 Interests\nMingling psychology with data science and software engineering\nComputational statistics and developing software tools for social sciences\nSimulation-based methods for sample size analysis"
   },
   {
+    "objectID": "exercises/exercises.html",
+    "href": "exercises/exercises.html",
+    "title": "Coming soon",
+    "section": "",
+    "text": "Coming soon."
+  },
+  {
     "objectID": "exercises/power-analysis-var-1.html",
     "href": "exercises/power-analysis-var-1.html",
     "title": "Simulation-based power analysis for the \\(\\text{AR}(1)\\) and \\(\\text{VAR}(1)\\) models",
@@ -168,11 +175,11 @@
     "text": "Get the session info\nBelow we provide the session information (i.e., operating system, details about the R installation, and so on) for reproducibility purposes.\n\nsessionInfo()\n\nR version 4.3.0 (2023-04-21)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Ventura 13.3.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Amsterdam\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] MASS_7.3-58.4     lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0    \n [5] dplyr_1.1.2       purrr_1.0.1       readr_2.1.4       tidyr_1.3.0      \n [9] tibble_3.2.1      tidyverse_2.0.0   ggplot2_3.4.2     psych_2.3.3      \n[13] data.table_1.14.8\n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.3      jsonlite_1.8.4    compiler_4.3.0    tidyselect_1.2.0 \n [5] parallel_4.3.0    scales_1.2.1      yaml_2.3.7        fastmap_1.1.1    \n [9] lattice_0.21-8    R6_2.5.1          labeling_0.4.2    generics_0.1.3   \n[13] knitr_1.43        htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0     \n[17] tzdb_0.4.0        rlang_1.1.1       utf8_1.2.3        stringi_1.7.12   \n[21] xfun_0.39         timechange_0.2.0  cli_3.6.1         withr_2.5.0      \n[25] magrittr_2.0.3    digest_0.6.31     grid_4.3.0        rstudioapi_0.14  \n[29] hms_1.1.3         lifecycle_1.0.3   nlme_3.1-162      vctrs_0.6.2      \n[33] mnormt_2.1.1      evaluate_0.21     glue_1.6.2        farver_2.1.1     \n[37] fansi_1.0.4       colorspace_2.1-0  rmarkdown_2.22    tools_4.3.0      \n[41] pkgconfig_2.0.3   htmltools_0.5.5"
   },
   {
-    "objectID": "exercises/sample-size-analysis-ggm.html",
-    "href": "exercises/sample-size-analysis-ggm.html",
-    "title": "Sample size analysis for the \\(\\text{GGM}\\)",
+    "objectID": "exercises/sample-size-analysis-powerly.html",
+    "href": "exercises/sample-size-analysis-powerly.html",
+    "title": "Sample size analysis using powerly",
     "section": "",
-    "text": "To be added by Mihai, just for reference."
+    "text": "Coming soon."
   },
   {
     "objectID": "exercises/sample-size-solutions-n-1.html",
@@ -250,5 +257,12 @@
     "title": "Sample size solutions for \\(N = 1\\) intensive longitudinal designs",
     "section": "Get the session info",
     "text": "Get the session info\nBelow we provide the session information (i.e., operating system, details about the R installation, and so on) for reproducibility purposes.\n\nsessionInfo()\n\nR version 4.3.0 (2023-04-21)\nPlatform: aarch64-apple-darwin20 (64-bit)\nRunning under: macOS Ventura 13.3.1\n\nMatrix products: default\nBLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib \nLAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0\n\nlocale:\n[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8\n\ntime zone: Europe/Amsterdam\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n [1] MASS_7.3-58.4     lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0    \n [5] dplyr_1.1.2       purrr_1.0.1       readr_2.1.4       tidyr_1.3.0      \n [9] tibble_3.2.1      tidyverse_2.0.0   ggplot2_3.4.2     psych_2.3.3      \n[13] data.table_1.14.8\n\nloaded via a namespace (and not attached):\n [1] gtable_0.3.3      jsonlite_1.8.4    compiler_4.3.0    tidyselect_1.2.0 \n [5] parallel_4.3.0    scales_1.2.1      yaml_2.3.7        fastmap_1.1.1    \n [9] lattice_0.21-8    R6_2.5.1          labeling_0.4.2    generics_0.1.3   \n[13] knitr_1.43        htmlwidgets_1.6.2 munsell_0.5.0     pillar_1.9.0     \n[17] tzdb_0.4.0        rlang_1.1.1       utf8_1.2.3        stringi_1.7.12   \n[21] xfun_0.39         timechange_0.2.0  cli_3.6.1         withr_2.5.0      \n[25] magrittr_2.0.3    digest_0.6.31     grid_4.3.0        rstudioapi_0.14  \n[29] hms_1.1.3         lifecycle_1.0.3   nlme_3.1-162      vctrs_0.6.2      \n[33] mnormt_2.1.1      evaluate_0.21     glue_1.6.2        farver_2.1.1     \n[37] fansi_1.0.4       colorspace_2.1-0  rmarkdown_2.22    tools_4.3.0      \n[41] pkgconfig_2.0.3   htmltools_0.5.5"
+  },
+  {
+    "objectID": "slides/slides.html",
+    "href": "slides/slides.html",
+    "title": "Coming soon",
+    "section": "",
+    "text": "Coming soon."
   }
 ]
