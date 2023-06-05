@@ -30,18 +30,22 @@ website:
         href: index.md
       - text: Slides
         menu:
-          - href: slide.md
-            text: The First Set of Slides
+          - href: slides/slides.md
+            text: "Sample size planning for intensive longitudinal designs"
+          - href: slides/slides.md
+            text: "Advanced methods for sample size planning"
       - text: Exercises
         menu:
           - href: exercises/power-analysis-var-1.Rmd
             text: Simulation-based power for $\text{AR}(1)$ and $\text{VAR}(1)$
           - href: exercises/sample-size-solutions-n-1.Rmd
             text: Sample size solutions for $N = 1$ intensive designs
-          - href: exercises/sample-size-analysis-ggm.qmd
-            text: Sample size analysis for the $\text{GGM}$
-          - href: exercise.md
-            text: "..."
+          - href: exercises/exercises.md
+            text: "Simulation-based power analysis for multilevel models"
+          - href: exercises/exercises.md
+            text: "Analytical-based power analysis for multilevel models"
+          - href: exercises/sample-size-analysis-powerly.qmd
+            text: Sample size analysis using `powerly`
       - text: Presenters
         menu:
           - href: presenters/ginette-lafit.md
