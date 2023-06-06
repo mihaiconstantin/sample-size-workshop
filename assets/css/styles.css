@@ -18,6 +18,7 @@ main.content {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-radius: 0.5rem;
     padding: 0.5rem;
+    max-width: 95%;
 }
 
 #modules table, #given-at table {
