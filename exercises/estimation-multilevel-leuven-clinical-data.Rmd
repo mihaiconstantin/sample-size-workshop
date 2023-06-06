@@ -1,0 +1,619 @@
+---
+title: "Multilevel Model Estimation Using the Lueven Clinical Data Set"
+author:
+  - "[Ginette Lafit](/presenters/ginette-lafit.md)"
+date: today
+toc: true
+format:
+    html: default
+    pdf: default
+execute:
+  freeze: auto
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Preliminaries
+
+## Prelim - Installing libraries used in this script (whenever is necessary).
+
+```{r chunk-install-package, echo=TRUE, warning=TRUE, results="hide", message=FALSE}
+# This code chunk simply makes sure that all the
+# libraries used here are installed.
+# Check if R packages are installed
+## Do not run because we do not want to install packages (this should be your decision)
+
+#list.of.packages = c("tidyverse","data.table","psych","viridis","nlme")
+#new.packages = list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+#if(length(new.packages)) install.packages(new.packages)
+
+# Delete # if the package PowerLAPIM is not installed yet
+#library(devtools)
+#devtools::install_github("ginettelafit/PowerLAPIM", force = T)
+```
+
+### Upload libraries to be used in the analysis
+
+```{r chunk-libraries, echo=TRUE, warning=TRUE, results="hide", message=FALSE}
+library(tidyverse) # reshaped data, variable transformation, plots (using library ggplot2)
+library(data.table) # to create lagged outcome
+library(psych) # to compute descriptive statistics & some psychometrics
+library(viridis) # color scales adapted for colorblindness
+library(nlme) # to estimate mixed-effects models
+set.seed(1234) # we set the random seed to reproduce the analysis
+```
+
+# The dataset
+
+We use data from @heininga2019dynamical; this study applies the ESM methodology
+to study emotion dynamics in people with Major Depressive Disorder. The study
+consist of an ESM testing period of 7 days in which participants had to fill out
+questions about mood and social context on their daily lives ten times a day
+(i.e., 70 measurement occasions). The data set contains 38 participants
+diagnosed with MDD and 40 control subjects. Participants filled out the ESM
+questionnaires in a stratified random interval scheme between 9:30 AM and 9:30
+PM.
+
+The dataset contains the following variables: `PID` that denotes the individual
+identification number, `day` is a variable that ranges from 1 to 7 and
+identifies the day of ESM testing, `daybeep` is a variable that ranges from 1 to
+10 and identifies the number of the prompt or beep within a day. `PA` is the
+Positive Affect computed as the mean of items: 'How happy do you feel at the
+moment?', 'How relaxed do you feel at the moment?' and 'How euphoric do you feel
+at the moment?'. `NA.` is the Negative Affect computed as the mean of items:
+'How depressed do you feel at the moment?', 'How stressed do you feel at the
+moment?', 'How anxious do you feel at the moment?', 'How angry do you feel at
+the moment?' and 'How restless do you feel at the moment?'. `anhedonia`
+corresponds to the ESM item 'To what degree do you find it difficult to
+experience pleasure in activities at the moment?'. `MDD` is a dummy variable
+equal to one when the individual has been diagnosed with MDD and 0 otherwise,
+finally `QIDS` denotes the sum of the items of the Quick Inventory of Depressive
+Symptomatology (i.e. QIDS) [@rush200316]. QIDS was measured before the ESM
+testing period.
+
+First we are going to load the data set:
+
+```{r chunk-load-data, echo = TRUE}
+# Load data set
+load(file="assets/data/clinical-dataset.RData")
+
+# Find the dimensions
+dim(data)
+
+# Find the structure
+str(data)
+
+# See the first 6 rows
+head(data)
+
+# See the last 6 rows
+tail(data)
+
+# Find the column names
+names(data)
+
+# Summary of the data
+summary(data)
+
+# Number of participants
+length(unique(data$PID))
+
+# Add variable number of observation per person
+data$obs = rep(0,nrow(data))
+for (i in unique(data$PID)){
+    data$obs[which(data$PID==i)] = 1:length(which(data$PID==i))
+}
+
+table(data$obs)
+```
+
+# Visualizations and descriptive statistics
+
+We first compute descriptive statistics including number of participant, number
+of observations per day, and compliance.
+
+```{r, chunk-descriptive-statistics, echo=TRUE}
+# Get number of participants
+length(unique(data$PID))
+
+# Obtain number of participants diagnosed with MDD
+length(unique(data$PID[data$MDD==1]))
+
+# Obtain number of participants in the control group
+length(unique(data$PID[data$MDD==0]))
+
+# Get the number of assessment per day
+table(data$PID)
+# Get the number of assessment per day for each participant
+beeps.person = lapply(data$PID, function(i) table(data$day[which(data$PID==i)]))
+# Show results for some of the participants
+beeps.person[1:6]
+
+# Compute a binary variable indicating if a participant answered a beep. We take the ESM item Happy as reference
+data$Compliance = ifelse(is.na(data$PA)==FALSE, 1, 0)
+
+# Mean, median of the compliance across all participants
+describe(data$Compliance)
+
+# Compliance per participant
+data.compliance.person = aggregate(data$Compliance, by = list(data$PID), mean, na.rm = TRUE)
+
+# See the first 6 rows
+head(data.compliance.person)
+
+# See the last 6 rows
+tail(data.compliance.person)
+
+# Obtain descriptive statistics of person's average compliance
+describe(data.compliance.person$x)
+```
+
+Next, we obtain visualizations and descriptive statistics of the distribution of
+the person-level or time-invariant variables.
+
+```{r, chunk-descriptive-statistics-level2-variables, echo=TRUE}
+# We create a variable including the variable diagnosis (1 = MDD, 0 = control), and depression (QIDS) for each participant
+dt.person = aggregate(cbind(data$MDD,data$QIDS), by = list(data$PID), mean, na.rm = TRUE)
+colnames(dt.person) = c("Group.1","MDD","QIDS")
+
+# See the first 6 rows
+head(dt.person)
+
+# See the last 6 rows
+tail(dt.person)
+
+# Descriptive statistics for time-invariant variable QIDS
+describe(dt.person$QIDS)
+
+# Descriptive statistics for time-invariant variable QIDS for MDD=1
+describe(dt.person$QIDS[dt.person$MDD==1])
+
+# Descriptive statistics for time-invariant variable QIDS for MDD=0
+describe(dt.person$QIDS[dt.person$MDD==0])
+```
+
+We now focus on time-varying variables, we obtain visualization and descriptive
+statistics for the time-varying variable negative affect (NA).
+
+```{r, chunk-descriptive-statistics-level1-variables, echo=TRUE}
+#| fig-align: center
+
+# Histogram for the time-varying variable negative affect (NA.)
+ggplot(data, aes(NA.)) + geom_histogram(bins=30) +  scale_fill_viridis() + theme_bw()
+
+# Histogram for the time-varying variable NA. by MDD
+ggplot(data, aes(NA.)) + geom_histogram(bins=30) +
+  facet_wrap(~MDD) + scale_fill_viridis() + theme_bw()
+
+# Descriptive statistics for NA.
+describe(data$NA.)
+
+# Descriptive statistics for NA. for MDD=1
+describe(data$NA.[data$MDD==1])
+
+# Descriptive statistics for NA. for MDD=1
+describe(data$NA.[data$MDD==0])
+
+# Distribution of happy per participant
+data.table.dt = setDT(na.omit(data))
+data.table.dt[, as.list(summary(NA., na.omit = TRUE)), by = PID]
+
+# We randomly select 10 participants for plotting the distribution of the time-varying variable NA.
+n.ID.sample = sample(unique(data$PID),4)
+data.person.sample = data[which(data$PID %in% n.ID.sample),]
+
+# Histogram for the time-varying variable happy by person
+ggplot(data.person.sample, aes(NA.)) + geom_histogram(color="black", fill="white",bins=30) +
+  facet_wrap(~PID) +  scale_fill_viridis() + theme_bw()
+
+# Plot the trajectories of the time-varying variable NA by person
+data.person.sample %>%
+  ggplot(aes(x = obs, y = NA.)) +
+  geom_point() +
+  geom_line() +  # add lines to connect the data for each person
+  facet_wrap( ~ PID) +  scale_fill_viridis() + theme_bw()
+
+# We create a variable including the MDD (1 = MDD, 0 = Controls), and person's means of the time-varying variable NA.
+dt.person = aggregate(cbind(data$MDD,data$NA.), by = list(data$PID), mean, na.rm = TRUE)
+colnames(dt.person) = c("Group.1","MDD","NA.")
+
+# See the first 6 rows
+head(dt.person)
+
+# See the last 6 rows
+tail(dt.person)
+
+# Descriptive statistics for person's means of the time-varying variable NA.
+describe(dt.person$NA.)
+
+# Descriptive statistics for person's means of the time-varying variable NA. for MDD=1
+describe(dt.person$NA.[dt.person$MDD==1])
+
+# Descriptive statistics for person's means of the time-varying variable NA. for MDD=0
+describe(dt.person$NA.[dt.person$MDD==0])
+
+# We create a variable including the MDD (1 = MDD, 0 = Controls), and person's standard deviation of the time-varying variable NA.
+dt.person.sd = aggregate(data$NA., by = list(data$PID,data$MDD), sd, na.rm = TRUE)
+colnames(dt.person.sd) = c("Group.1","MDD","NA.")
+
+# See the first 6 rows
+head(dt.person.sd)
+
+# See the last 6 rows
+tail(dt.person.sd)
+
+# Descriptive statistics for person's standard deviation of the time-varying variable NA.
+describe(dt.person.sd$NA.)
+
+# Descriptive statistics for person's standard deviation of the time-varying variable NA. for MDD=1
+describe(dt.person.sd$NA.[dt.person.sd$MDD==1])
+
+# Descriptive statistics for person's standard deviation of the time-varying variable NA. for MDD=0
+describe(dt.person.sd$NA.[dt.person.sd$MDD==0])
+```
+
+# Example 1: estimate the effect of a continuous time-varying predictor
+
+The first illustrative example shows how to estimate the effect of a
+time-varying predictor on the outcome of interest. Considering the Leuven
+clinical study, we are interested in studying the impact of Anhedonia on
+Negative Affect in daily life on patients with major depressive disorder (MDD).
+
+We use the data of 38 individuals diagnosed with MDD; we select the individuals
+diagnosed with MDD.
+
+```{r chunk-subset-data, echo = TRUE}
+data.MDD = data[which(data$MDD==1),]
+```
+
+First, we are going to estimate the individual means, the mean across all participants, and the standard deviation of the variable `anhedonia`.
+
+```{r chunk-centering-l1-predictor-1, echo = TRUE}
+# Compute the group mean of anhedonia
+groupmean_X = aggregate(data.MDD$anhedonia, list(data.MDD$PID), FUN = mean, data=data.MDD, na.rm=TRUE)
+mean_X = mean(groupmean_X[,2])
+mean_X
+
+# Compute the standard deviation of anhedonia
+sd_X = sd(data.MDD$anhedonia, na.rm=TRUE)
+sd_X
+```
+
+Next, we are going to person mean-centered the variable `anhedonia`.
+
+```{r chunk-centering-l1-predictor-2, echo = TRUE}
+# Centered within individuals anhedonia.
+N.i = unique(data.MDD$PID)
+anhedonia.c = rep(0, nrow(data.MDD))
+
+for(i in N.i){
+    anhedonia.c[which(data.MDD$PID==i)] = data.MDD$anhedonia[which(data.MDD$PID==i)] -
+    mean(data.MDD$anhedonia[which(data.MDD$PID==i)],na.rm=TRUE)
+}
+
+data.MDD = cbind(data.MDD,anhedonia.c)
+```
+
+We estimate the linear mixed-effects model assuming AR(1) errors:
+
+```{r chunk-fit-model-1, echo = TRUE}
+# fit a linear mixed-effects model to data
+fit.Model.1 = lme(NA. ~ 1 + anhedonia.c, random = ~1 + anhedonia.c|PID,na.action=na.omit, data=data.MDD, correlation=corAR1(), method="REML")
+```
+
+The summary of the estimation results is given by:
+
+```{r chunk-summary-model-1, echo = TRUE}
+summary(fit.Model.1)
+```
+
+Obtain confidence intervals:
+
+```{r chunk-summary-CI-model-1, echo = TRUE}
+intervals(fit.Model.1, which = "fixed")
+```
+
+The estimated fixed intercept is given by:
+
+```{r chunk-summary-model-1-FE-1, echo = TRUE}
+# Extract fixed effect coefficients
+# extract the value of fixed intercept
+coef(summary(fit.Model.1))[1,1]
+```
+
+the effect of the level-2 continuous variable on the intercept is extracted as
+follows:
+
+```{r chunk-summary-model-1-FE-2, echo = TRUE}
+# extract the value of the fixed slope
+coef(summary(fit.Model.1))[2,1]
+```
+
+The standard deviation and autocorrelation of the level-1 residuals are
+extracted as follows:
+
+```{r chunk-summary-model-1-L1-Errors, echo = TRUE}
+# Extract level-1 residuals standard deviation
+as.numeric(VarCorr(fit.Model.1)[3,2])
+
+# Extract level-1 residuals correlation between consecutive points
+as.numeric(coef(fit.Model.1$modelStruct$corStruct,unconstrained=FALSE))
+```
+
+The standard deviation of the random intercept is given by:
+
+```{r chunk-summary-model-1-RE-1, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random intercept
+as.numeric(VarCorr(fit.Model.1)[1,2])
+```
+
+The standard deviation of the random slope is given by:
+
+```{r chunk-summary-model-1-RE-2, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random slope
+as.numeric(VarCorr(fit.Model.1)[2,2])
+```
+
+The correlation between the random intercept and the random slope is given by:
+
+```{r chunk-summary-model-1-RE-3, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random slope
+as.numeric(VarCorr(fit.Model.1)[2,3])
+```
+
+# Example 2: estimate cross-level interaction effect between a continuous time-varying predictor and a continuous time-invariant predictor
+
+We now show how to estimate a cross-level interaction effect between a
+continuous time-varying predictor and continuous time-invariant predictor. In
+particular, we are interested in studying if depression moderated the impact of
+anhedonia on negative affect in daily life for individuals diagnosed with MDD.
+
+Before estimating the model, we are going to compute the mean and standard
+deviation of the Level 2 variable `QIDS`.
+
+```{r chunk-subset-data-stats-MDD, echo = TRUE}
+# Compute the mean of W
+groupmean_W = aggregate(data.MDD$QIDS, list(data.MDD$PID), FUN = mean, data=data.Controls, na.rm=TRUE, method = "REML")
+mean_W = mean(groupmean_W[,2])
+mean_W
+
+# Compute the standard deviation of W
+
+sd_W = sd(groupmean_W[,2])
+sd_W
+```
+
+Next, we are going to mean centered the variable `QIDS` using the mean estimated
+above:
+
+```{r chunk-centering-l2-predictor-controls, echo = TRUE}
+# Centered QIDS
+
+N.i = unique(data.MDD$PID)
+QIDS.c = rep(0,nrow(data.MDD))
+for(i in N.i){
+QIDS.c[which(data.MDD$PID==i)] = data.MDD$QIDS[which(data.MDD$PID==i)] - mean_W
+}
+
+data.MDD = cbind(data.MDD,QIDS.c)
+```
+
+Next, we estimate the linear mixed-effects model assuming AR(1) errors:
+
+```{r chunk-fit-model-2, echo = TRUE}
+# fit a linear mixed-effects model to data
+fit.Model.2 = lme(NA. ~ 1 + anhedonia.c + anhedonia.c*QIDS.c, random = ~1 + anhedonia.c|PID,na.action=na.omit, data=data.MDD, correlation=corAR1(), method="REML")
+```
+
+The summary of the estimation results is given by:
+
+```{r chunk-summary-model-2, echo = TRUE}
+summary(fit.Model.2)
+```
+
+Obtain confidence intervals:
+
+```{r chunk-summary-CI-model-2, echo = TRUE}
+intervals(fit.Model.2, which = "fixed")
+```
+
+The estimated fixed intercept is given by:
+
+```{r chunk-summary-model-2-FE, echo = TRUE}
+# Extract fixed effect coefficients
+# extract the value of fixed intercept
+coef(summary(fit.Model.2))[1,1]
+```
+
+the effect of the level-2 continuous variable on the intercept is extracted as
+follows:
+
+```{r chunk-summary-model-2-FE-1, echo = TRUE}
+# extract the value of the fixed slope
+coef(summary(fit.Model.2))[2,1]
+```
+
+the effect of the level-2 continuous variable on the intercept is extracted as
+follows:
+
+```{r chunk-summary-model-2-FE-2, echo = TRUE}
+# extract the value of the fixed slope
+coef(summary(fit.Model.2))[3,1]
+```
+
+the effect of the level-2 continuous variable on the intercept is extracted as
+follows:
+
+```{r chunk-summary-model-2-FE-3, echo = TRUE}
+# extract the value of the fixed slope
+coef(summary(fit.Model.2))[4,1]
+```
+
+The standard deviation and autocorrelation of the level-1 residuals are
+extracted as follows:
+
+```{r chunk-summary-model-2-L1-Errors, echo = TRUE}
+# Extract level-1 residuals standard deviation
+as.numeric(VarCorr(fit.Model.2)[3,2])
+
+# Extract level-1 residuals correlation between consecutive points
+as.numeric(coef(fit.Model.2$modelStruct$corStruct,unconstrained=FALSE))
+```
+
+The standard deviation of the random intercept is given by:
+
+```{r chunk-summary-model-2-RE-1, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random intercept
+as.numeric(VarCorr(fit.Model.2)[1,2])
+```
+
+The standard deviation of the random slope is given by:
+
+```{r chunk-summary-model-2-RE-2, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random slope
+as.numeric(VarCorr(fit.Model.2)[2,2])
+```
+
+The correlation between the random intercept and the random slope is given by:
+
+```{r chunk-summary-model-2-RE-3, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random slope
+as.numeric(VarCorr(fit.Model.2)[2,3])
+```
+
+# Example 3. Estimate group differences in the autoregressive effect in multilevel AR(1) models
+
+In this illustration, we are interested in estimating differences in the
+autoregressive effect of Negative Affect between participants diagnosed with
+major depressive disorder (MDD) and control subjects. The dataset contains 38
+participants diagnosed with MDD and 40 control subjects.
+
+First, for each individual, we are going to compute the lagged variable Negative
+Affect. The variable Negative Affect is lagged within each day.
+
+```{r chunk-lag-l1-predictor-PA, echo = TRUE}
+# Create a lag variable: the data is lag within a person and days
+NA.lag = rep(0,nrow(data))
+subjno.i = unique(data$PID)
+
+for (i in subjno.i) {
+    n.i = which(data$PID == i)
+    Day.i = data$day[n.i]
+
+    for (t in unique(Day.i)) {
+        k.i = n.i[which(data$day[n.i] == t)]
+        NA.lag[k.i] = shift(data$NA.[k.i], 1)
+    }
+}
+
+data = cbind(data,NA.lag)
+```
+
+The lagged variable `NA.lag` will be centered using the individual's mean.
+
+```{r chunk-centering-lag-l1-predictor-PA, echo = TRUE}
+# Centered within individuals PA.lag
+
+N.i = unique(data$PID)
+NA.lag.c = rep(0, nrow(data))
+
+for(i in N.i) {
+    NA.lag.c[which(data$PID==i)] = data$NA.lag[which(data$PID==i)] -
+    mean(data$NA.[which(data$PID==i)],na.rm=TRUE)
+}
+
+data = cbind(data,NA.lag.c)
+```
+
+To estimate the model, we use the function `lme` from the `nlme` R package. The
+dependent variable is the Negative Affect (i.e. NA.), the predictor is the
+lagged outcome, which is centered using the individuals' mean:
+
+```{r chunk-fit-model-3, echo = TRUE}
+# fit a linear mixed-effects model to data
+fit.Model.3 = lme(NA. ~ 1 + MDD + NA.lag + MDD*NA.lag, random = ~1 + NA.lag|PID, na.action=na.omit, data=data, method="REML")
+```
+
+where `NA.` is the negative affect, `1` is the fixed intercept, `MDD` is the difference in the fixed intercept between the two groups, `NA.lag.c` is the fixed autoregressive effect and `MDD*NA.lag.c` is the difference in the fixed autoregressive effect between the two groups. The random effect structure of the model is `1 + NA.lag.c|PID`, where `1` is the random intercept, and `NA.lag.c` is the random slope, which is allowed to vary over participants (`PID`).
+
+The summary of the estimation results is given by:
+
+```{r}
+summary(fit.Model.3)
+```
+
+We extract the estimated fixed intercept as follows,
+
+```{r chunk-summary-model-3-FE, echo = TRUE}
+# Extract fixed effect coefficients
+# extract the value of fixed intercept
+coef(summary(fit.Model.3))[1,1]
+```
+
+the differences on the intercept between the two groups is given by:
+
+```{r chunk-summary-model-3-FE-1, echo = TRUE}
+# extract the value of the difference in the fixed intercept between the two groups
+coef(summary(fit.Model.3))[2,1]
+```
+
+the fixed autoregressive effect is:
+
+```{r chunk-summary-model-3-FE-2, echo = TRUE}
+# extract the value of fixed slope
+coef(summary(fit.Model.3))[3,1]
+```
+
+and the difference in the autoregressive effect between the two groups is extracted as follows:
+
+```{r chunk-summary-model-3-FE-3, echo = TRUE}
+# extract the value of the difference in the fixed slope between the two groups
+coef(summary(fit.Model.3))[4,1]
+```
+
+The standard deviation of the level-1 residuals is extracted as follows:
+
+```{r chunk-summary-model-3-L1-Errors, echo = TRUE}
+# Extract level-1 residuals standard deviation
+as.numeric(VarCorr(fit.Model.3)[3,2])
+```
+
+The standard deviation of the random intercept is given by:
+
+```{r chunk-summary-model-3-RE-1, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random intercept
+as.numeric(VarCorr(fit.Model.3)[1,2])
+```
+
+The standard deviation of the random slope is given by:
+
+```{r chunk-summary-model-3-RE-2, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random slope
+as.numeric(VarCorr(fit.Model.3)[2,2])
+```
+
+The correlation between the random intercept and the random slope is given by:
+
+```{r chunk-summary-model-3-RE-3, echo = TRUE}
+# Extract random effect covariance structure
+# Extract the standard deviation of the random slope
+as.numeric(VarCorr(fit.Model.3)[2,3])
+```
+
+# Get the session info (also for reproducibility)
+
+```{r chunk-session-info, echo = TRUE}
+sessionInfo()
+```
+
+## References
