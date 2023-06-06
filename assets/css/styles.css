@@ -21,6 +21,23 @@ main.content {
     max-width: 95%;
 }
 
+figcaption {
+    text-align: center;
+}
+
 #modules table, #given-at table {
     vertical-align: middle;
+}
+
+.sourceCode, .cell-output {
+    font-size: 0.8rem;
+}
+
+.code-font-small .cell-output {
+    font-size: 0.75rem;
+}
+
+.todo {
+    color: darkred;
+    font-weight: bold;
 }
