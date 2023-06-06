@@ -38,7 +38,6 @@ packages:
 - [`devtools`](https://CRAN.R-project.org/package=devtools)
 - [`data.table`](https://CRAN.R-project.org/package=data.table)
 - [`MASS`](https://CRAN.R-project.org/package=MASS)
-- [`compiler`](https://CRAN.R-project.org/package=compiler)
 - [`future.apply`](https://CRAN.R-project.org/package=future.apply)
 
 Which we can install in one go as follows:
@@ -54,7 +53,7 @@ packages = c(
     "tidyverse", "gridExtra", "formattable", "htmltools", "shiny",
     "DT", "ggplot2", "plyr", "dplyr", "tidyr", "shinyjs", "shinythemes",
     "viridis", "plotly", "remotes", "nlme", "devtools", "data.table",
-    "MASS", "compiler", "future.apply"
+    "MASS", "future.apply"
 )
 
 # Install packages.
@@ -95,7 +94,6 @@ library(nlme)
 library(devtools)
 library(data.table)
 library(MASS)
-library(compiler)
 library(future.apply)
 ```
 
