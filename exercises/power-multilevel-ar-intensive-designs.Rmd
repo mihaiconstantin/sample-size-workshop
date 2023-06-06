@@ -32,7 +32,6 @@ packages:
 - [`formattable`](https://CRAN.R-project.org/package=formattable)
 - [`tidyr`](https://CRAN.R-project.org/package=tidyr)
 - [`MASS`](https://CRAN.R-project.org/package=MASS)
-- [`compiler`](https://CRAN.R-project.org/package=compiler)
 - [`kableExtra`](https://CRAN.R-project.org/package=kableExtra)
 - [`future.apply`](https://CRAN.R-project.org/package=future.ap)
 - [`PowerAnalysisIL`](https://CRAN.R-project.org/package=PowerAnalysisIL)
