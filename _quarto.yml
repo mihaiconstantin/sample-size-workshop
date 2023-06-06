@@ -9,6 +9,8 @@ project:
   output-dir: docs
   resources:
     - assets/images/website-card.jpg
+    - assets/library/bibliography.bib
+    - assets/library/apa.csl
 website:
   title: "Sample Size Help"
   description: |
@@ -74,3 +76,5 @@ format:
       light: cosmo
     css: assets/css/styles.css
     toc: false
+bibliography: assets/library/bibliography.bib
+csl: assets/library/apa.csl
