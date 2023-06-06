@@ -42,18 +42,17 @@ occasions are required in order to optimize predictive accuracy.
 
 ## 📊 Learning Objectives
 
-The workshop provides a *road map* on how to determine the sample size in IL
-designs.
-
-Upon course completion, participants will:
+The workshop provides a *road map* on how to determine the sample size in
+intensive longitudinal designs. Upon course completion, participants will:
 
 - be familiar with methods for conducting power analysis for $\text{AR}(1)$ and
-  $\text{VAR}(1)$ models in $N = 1$ intensive longitudinal designs
-- understand the different steps of the simulation-based power analysis approach
-- be able to implement existing tool for conducting power analysis for
-  $\text{AR}(1)$ and $\text{VAR}(1)$ models in $N = 1$ intensive longitudinal
+  $\text{VAR}(1)$ models in $N = 1$ and multilevel intensive longitudinal
   designs
-- be familiar with an new methods for conducting sample size analysis based on
+- understand the key differences between simulation-based and analytical power
+  analysis approaches
+- be able to leverage existing tools for conducting power analysis for
+  $\text{AR}(1)$ and $\text{VAR}(1)$ for intensive longitudinal designs
+- be familiar with new methods for conducting sample size analysis based on
   criteria different than statistical power (e.g., predictive accuracy or
   sensitivity)
 
