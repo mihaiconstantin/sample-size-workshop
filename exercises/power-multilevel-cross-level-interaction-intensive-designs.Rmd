@@ -1,5 +1,5 @@
 ---
-title: "Power Analysis for Multilevel Models With Cross-level Interactions in Intensive Longitudinal Designs"
+title: Power Analysis for Multilevel Models With Cross-level Interactions in Intensive Longitudinal Designs
 author:
   - "[Ginette Lafit](/presenters/ginette-lafit.md)"
 date: today
