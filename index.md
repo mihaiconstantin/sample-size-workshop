@@ -60,13 +60,8 @@ intensive longitudinal designs. Upon course completion, participants will:
 
 Participants should have some basic knowledge of `R` and some experience with
 `RStudio`. For the hands-on parts of the workshop, you need to install `R`
-version `4.1.2` or higher, `RStudio`, and the following `R` packages:
-
-- [`data.table`](https://CRAN.R-project.org/package=data.table)
-- [`psych`](https://CRAN.R-project.org/package=psych)
-- [`psych`](https://CRAN.R-project.org/package=MASS)
-- [`tidyverse`](https://www.tidyverse.org/packages/)
-- [`powerly`](https://powerly.dev)
+version `4.1.2` or higher, `RStudio`, and several `R` packages as indicated on
+the page corresponding to each exercise.
 
 Some exercises in this workshop also involve using `Shiny` applications to run
 power analysis. You can find additional instructions on how to download and run
@@ -75,6 +70,9 @@ the `Shiny` applications below:
 - for [Predictive Accuracy Analysis and power analysis for the $\text{VAR}(1)$][1]
 - for [power analysis for multilevel models using the simulation-based approach][2]
 - for [power analysis for multilevel models using the analytic approach][3]
+
+You can find detailed instructions and examples for conducting sample size
+analysis using the `powerly` package at [powerly.dev](https://powerly.dev/).
 
 ## 📂 Modules
 
