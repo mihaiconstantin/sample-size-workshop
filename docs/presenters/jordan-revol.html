@@ -4558,9 +4558,23 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 border-radius: 0.5rem;
 padding: 0.5rem;
+max-width: 95%;
+}
+figcaption {
+text-align: center;
 }
 #modules table, #given-at table {
 vertical-align: middle;
+}
+.sourceCode, .cell-output {
+font-size: 0.8rem;
+}
+.code-font-small .cell-output {
+font-size: 0.75rem;
+}
+.todo {
+color: darkred;
+font-weight: bold;
 }
 </style>
 <meta name="twitter:title" content="Sample Size Planning Workshop">
@@ -4612,20 +4626,24 @@ vertical-align: middle;
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-exercises">    
         <li>
-    <a class="dropdown-item" href="../exercises/power-analysis-var-1.html" rel target>
- <span class="dropdown-text">Simulation-based power for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span></span></a>
+    <a class="dropdown-item" href="../exercises/power-simulation-n-1-intensive-designs.html" rel target>
+ <span class="dropdown-text">Simulation-based power for <span class="math inline">\(N = 1\)</span> intensive designs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../exercises/sample-size-solutions-n-1.html" rel target>
+    <a class="dropdown-item" href="../exercises/sample-size-solutions-n-1-intensive-designs.html" rel target>
  <span class="dropdown-text">Sample size solutions for <span class="math inline">\(N = 1\)</span> intensive designs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../exercises/exercises.html" rel target>
- <span class="dropdown-text">Simulation-based power analysis for multilevel models</span></a>
+    <a class="dropdown-item" href="../exercises/estimation-multilevel-leuven-clinical-data.html" rel target>
+ <span class="dropdown-text">Multilevel model estimation using the Leuven Clinical Dataset</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../exercises/exercises.html" rel target>
- <span class="dropdown-text">Analytical-based power analysis for multilevel models</span></a>
+    <a class="dropdown-item" href="../exercises/power-multilevel-cross-level-interaction-intensive-designs.html" rel target>
+ <span class="dropdown-text">Power for multilevel cross-level interaction intensive designs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../exercises/power-multilevel-ar-intensive-designs.html" rel target>
+ <span class="dropdown-text">Power for multilevel <span class="math inline">\(\text{AR}(1)\)</span> intensive designs</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../exercises/sample-size-analysis-powerly.html" rel target>

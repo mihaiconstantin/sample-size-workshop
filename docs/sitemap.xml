@@ -2,42 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://samplesize.help/index.html</loc>
-    <lastmod>2023-06-05T11:53:40.188Z</lastmod>
+    <lastmod>2023-06-06T21:01:02.780Z</lastmod>
   </url>
   <url>
     <loc>https://samplesize.help/presenters/eva-ceulemans.html</loc>
-    <lastmod>2023-06-05T11:53:41.691Z</lastmod>
+    <lastmod>2023-06-06T20:59:22.548Z</lastmod>
   </url>
   <url>
     <loc>https://samplesize.help/presenters/ginette-lafit.html</loc>
-    <lastmod>2023-06-05T11:53:43.153Z</lastmod>
+    <lastmod>2023-06-06T20:59:24.215Z</lastmod>
   </url>
   <url>
     <loc>https://samplesize.help/presenters/jordan-revol.html</loc>
-    <lastmod>2023-06-05T11:53:44.625Z</lastmod>
+    <lastmod>2023-06-06T20:59:25.728Z</lastmod>
   </url>
   <url>
     <loc>https://samplesize.help/presenters/mihai-constantin.html</loc>
-    <lastmod>2023-06-05T11:53:46.170Z</lastmod>
+    <lastmod>2023-06-06T20:59:27.386Z</lastmod>
   </url>
   <url>
-    <loc>https://samplesize.help/exercises/exercises.html</loc>
-    <lastmod>2023-06-05T11:53:51.939Z</lastmod>
+    <loc>https://samplesize.help/exercises/estimation-multilevel-leuven-clinical-data.html</loc>
+    <lastmod>2023-06-06T20:59:43.484Z</lastmod>
   </url>
   <url>
-    <loc>https://samplesize.help/exercises/power-analysis-var-1.html</loc>
-    <lastmod>2023-06-05T11:53:58.527Z</lastmod>
+    <loc>https://samplesize.help/exercises/power-multilevel-ar-intensive-designs.html</loc>
+    <lastmod>2023-06-06T20:59:52.317Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samplesize.help/exercises/power-multilevel-cross-level-interaction-intensive-designs.html</loc>
+    <lastmod>2023-06-06T21:00:05.381Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samplesize.help/exercises/power-simulation-n-1-intensive-designs.html</loc>
+    <lastmod>2023-06-06T21:00:19.737Z</lastmod>
   </url>
   <url>
     <loc>https://samplesize.help/exercises/sample-size-analysis-powerly.html</loc>
-    <lastmod>2023-06-05T11:54:04.111Z</lastmod>
+    <lastmod>2023-06-06T21:00:25.870Z</lastmod>
   </url>
   <url>
-    <loc>https://samplesize.help/exercises/sample-size-solutions-n-1.html</loc>
-    <lastmod>2023-06-05T11:54:13.159Z</lastmod>
+    <loc>https://samplesize.help/exercises/sample-size-solutions-n-1-intensive-designs.html</loc>
+    <lastmod>2023-06-06T21:00:41.998Z</lastmod>
   </url>
   <url>
     <loc>https://samplesize.help/slides/slides.html</loc>
-    <lastmod>2023-06-05T11:54:18.546Z</lastmod>
+    <lastmod>2023-06-06T21:00:48.214Z</lastmod>
   </url>
 </urlset>

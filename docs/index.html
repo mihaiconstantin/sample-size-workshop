@@ -4567,9 +4567,23 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 border-radius: 0.5rem;
 padding: 0.5rem;
+max-width: 95%;
+}
+figcaption {
+text-align: center;
 }
 #modules table, #given-at table {
 vertical-align: middle;
+}
+.sourceCode, .cell-output {
+font-size: 0.8rem;
+}
+.code-font-small .cell-output {
+font-size: 0.75rem;
+}
+.todo {
+color: darkred;
+font-weight: bold;
 }
 </style>
 <meta name="twitter:title" content="Sample Size Planning Workshop">
@@ -4621,20 +4635,24 @@ vertical-align: middle;
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-exercises">    
         <li>
-    <a class="dropdown-item" href="./exercises/power-analysis-var-1.html" rel target>
- <span class="dropdown-text">Simulation-based power for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span></span></a>
+    <a class="dropdown-item" href="./exercises/power-simulation-n-1-intensive-designs.html" rel target>
+ <span class="dropdown-text">Simulation-based power for <span class="math inline">\(N = 1\)</span> intensive designs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exercises/sample-size-solutions-n-1.html" rel target>
+    <a class="dropdown-item" href="./exercises/sample-size-solutions-n-1-intensive-designs.html" rel target>
  <span class="dropdown-text">Sample size solutions for <span class="math inline">\(N = 1\)</span> intensive designs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exercises/exercises.html" rel target>
- <span class="dropdown-text">Simulation-based power analysis for multilevel models</span></a>
+    <a class="dropdown-item" href="./exercises/estimation-multilevel-leuven-clinical-data.html" rel target>
+ <span class="dropdown-text">Multilevel model estimation using the Leuven Clinical Dataset</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./exercises/exercises.html" rel target>
- <span class="dropdown-text">Analytical-based power analysis for multilevel models</span></a>
+    <a class="dropdown-item" href="./exercises/power-multilevel-cross-level-interaction-intensive-designs.html" rel target>
+ <span class="dropdown-text">Power for multilevel cross-level interaction intensive designs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./exercises/power-multilevel-ar-intensive-designs.html" rel target>
+ <span class="dropdown-text">Power for multilevel <span class="math inline">\(\text{AR}(1)\)</span> intensive designs</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./exercises/sample-size-analysis-powerly.html" rel target>
@@ -4711,31 +4729,24 @@ Workshop on Sample Size Planning for <br> Intensive Longitudinal Studies
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">📊 Learning Objectives</h2>
-<p>The workshop provides a <em>road map</em> on how to determine the sample size in IL designs.</p>
-<p>Upon course completion, participants will:</p>
+<p>The workshop provides a <em>road map</em> on how to determine the sample size in intensive longitudinal designs. Upon course completion, participants will:</p>
 <ul>
-<li>be familiar with methods for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> intensive longitudinal designs</li>
-<li>understand the different steps of the simulation-based power analysis approach</li>
-<li>be able to implement existing tool for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> intensive longitudinal designs</li>
-<li>be familiar with an new methods for conducting sample size analysis based on criteria different than statistical power (e.g., predictive accuracy or sensitivity)</li>
+<li>be familiar with methods for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> and multilevel intensive longitudinal designs</li>
+<li>understand the key differences between simulation-based and analytical power analysis approaches</li>
+<li>be able to leverage existing tools for conducting power analysis for <span class="math inline">\(\text{AR}(1)\)</span> and <span class="math inline">\(\text{VAR}(1)\)</span> for intensive longitudinal designs</li>
+<li>be familiar with new methods for conducting sample size analysis based on criteria different than statistical power (e.g., predictive accuracy or sensitivity)</li>
 </ul>
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">💻 Prerequisites</h2>
-<p>Participants should have some basic knowledge of <code>R</code> and some experience with <code>RStudio</code>. For the hands-on parts of the workshop, you need to install <code>R</code> version <code>4.1.2</code> or higher, <code>RStudio</code>, and the following <code>R</code> packages:</p>
-<ul>
-<li><a href="https://CRAN.R-project.org/package=data.table"><code>data.table</code></a></li>
-<li><a href="https://CRAN.R-project.org/package=psych"><code>psych</code></a></li>
-<li><a href="https://CRAN.R-project.org/package=MASS"><code>psych</code></a></li>
-<li><a href="https://www.tidyverse.org/packages/"><code>tidyverse</code></a></li>
-<li><a href="https://powerly.dev"><code>powerly</code></a></li>
-</ul>
+<p>Participants should have some basic knowledge of <code>R</code> and some experience with <code>RStudio</code>. For the hands-on parts of the workshop, you need to install <code>R</code> version <code>4.1.2</code> or higher, <code>RStudio</code>, and several <code>R</code> packages as indicated on the page corresponding to each exercise.</p>
 <p>Some exercises in this workshop also involve using <code>Shiny</code> applications to run power analysis. You can find additional instructions on how to download and run the <code>Shiny</code> applications below:</p>
 <ul>
 <li>for <a href="https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0148925/shinyapp-paa_var_n1">Predictive Accuracy Analysis and power analysis for the <span class="math inline">\(\text{VAR}(1)\)</span></a></li>
 <li>for <a href="https://github.com/ginettelafit/PowerAnalysisIL">power analysis for multilevel models using the simulation-based approach</a></li>
 <li>for <a href="https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0119584/ApproxPowerIL">power analysis for multilevel models using the analytic approach</a></li>
 </ul>
+<p>You can find detailed instructions and examples for conducting sample size analysis using the <code>powerly</code> package at <a href="https://powerly.dev/">powerly.dev</a>.</p>
 </section>
 <section id="modules" class="level2">
 <h2 class="anchored" data-anchor-id="modules">📂 Modules</h2>
@@ -4752,26 +4763,26 @@ Workshop on Sample Size Planning for <br> Intensive Longitudinal Studies
 <tr class="odd">
 <td style="text-align: left;">Introduction to sample size planning in intensive longitudinal research</td>
 <td style="text-align: center;">45m</td>
-<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">slides</span></a></td>
 <td style="text-align: center;">-</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sample size planning for <span class="math inline">\(\text{VAR}(1)\)</span> models in <span class="math inline">\(N = 1\)</span> designs</td>
 <td style="text-align: center;">60m</td>
-<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
-<td style="text-align: center;"><a href="./exercises/power-analysis-var-1.html"><span class="badge rounded-pill bg-primary">exercise 1</span></a> <a href="./exercises/sample-size-solutions-n-1.html"><span class="badge rounded-pill bg-primary">exercise 2</span></a></td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">slides</span></a></td>
+<td style="text-align: center;"><a href="./exercises/power-simulation-n-1-intensive-designs.html"><span class="badge rounded-pill bg-primary">tutorial 1</span></a> <a href="./exercises/sample-size-solutions-n-1-intensive-designs.html"><span class="badge rounded-pill bg-primary">tutorial 2</span></a></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sample size planning for multilevel models applied to intensive longitudinal designs</td>
 <td style="text-align: center;">50m</td>
-<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
-<td style="text-align: center;"><a href="./exercises/exercises.html"><span class="badge rounded-pill bg-primary">exercise 1</span></a> <a href="./exercises/exercises.html"><span class="badge rounded-pill bg-primary">exercise 2</span></a></td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">slides</span></a></td>
+<td style="text-align: center;"><a href="./exercises/estimation-multilevel-leuven-clinical-data.html"><span class="badge rounded-pill bg-primary">tutorial 1</span></a> <a href="./exercises/power-multilevel-cross-level-interaction-intensive-designs.html"><span class="badge rounded-pill bg-primary">tutorial 2</span></a> <a href="./exercises/power-multilevel-ar-intensive-designs.html"><span class="badge rounded-pill bg-primary">tutorial 3</span></a></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Advanced methods for sample size analysis</td>
 <td style="text-align: center;">40m</td>
-<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">link</span></a></td>
-<td style="text-align: center;"><a href="./exercises/sample-size-analysis-powerly.html"><span class="badge rounded-pill bg-primary">exercise</span></a></td>
+<td style="text-align: center;"><a href="./slides/slides.html"><span class="badge rounded-pill bg-primary">slides</span></a></td>
+<td style="text-align: center;"><a href="./exercises/sample-size-analysis-powerly.html"><span class="badge rounded-pill bg-primary">tutorial</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -4812,7 +4823,9 @@ Workshop on Sample Size Planning for <br> Intensive Longitudinal Studies
 </ul>
 <!-- Reference links. -->
 <!-- Slide links. -->
-<!-- Exercise links. -->
+<!-- Exercise links Jordan. -->
+<!-- Exercise links Ginette. -->
+<!-- Myself. -->
 
 
 </section>
