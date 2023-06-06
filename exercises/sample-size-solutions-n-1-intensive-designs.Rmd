@@ -9,7 +9,9 @@ format:
     html: default
     pdf: default
 execute:
-  freeze: auto
+    freeze: auto
+    echo: true
+    eval: true
 ---
 
 ## Settings things up
@@ -46,7 +48,12 @@ packages that are already installed and up-to-date.
 
 Now that we have all packages installed, we continue by loading them.
 
-```{r chunk-libraries, echo=TRUE, warning=TRUE, results="hide", message=FALSE}
+```{r}
+#| name: load-packages
+#| warning: false
+#| message: false
+#| results: hide
+
 # To create lagged outcome variables.
 library(data.table)
 
@@ -65,21 +72,19 @@ set.seed(123)
 
 ## Description
 
-We use data from @heininga2019dynamical. This study applies the ESM methodology
-to study emotion dynamics in people with *Major Depressive Disorder* (MDD). The
-study consist of an ESM testing period of seven days in which participants had
-to fill out questions about mood and social context on their daily lives ten
-times a day (i.e., $70$ measurement occasions). The data set contains $38$
-participants diagnosed with MDD and $40$ control subjects. Participants filled
-out the ESM questionnaires in a stratified random interval scheme between 9:30
-AM and 9:30 PM.
+In this tutorial, we use data from @heininga2019dynamical. In this study, the
+authors applied the ESM methodology to study emotion dynamics in people with
+*Major Depressive Disorder* (MDD). The study consist of an ESM testing period of
+seven days in which participants had to fill out questions about mood and social
+context on their daily lives ten times a day (i.e., $70$ measurement occasions).
+The data set contains $38$ participants diagnosed with MDD and $40$ control
+subjects. Participants filled out the ESM questionnaires in a stratified random
+interval scheme between 9:30 AM and 9:30 PM.
 
 First, we are going to load the data set:
 
 ```{r}
 #| name: load-data
-#| echo: true
-#| eval: true
 
 # Load the data set.
 load(file = "assets/data/clinical-dataset.RData")
@@ -106,8 +111,6 @@ understanding of the variable measured.
 
 ```{r}
 #| name: data-subset
-#| echo: true
-#| eval: true
 
 # Select the first participant diagnosed with MDD.
 i.ID <- unique(data$PID[data$MDD == 1])[1]
@@ -123,9 +126,7 @@ from participant `101`.
 :::
 
 ```{r}
-#| name: data-exploration
-#| echo: true
-#| eval: true
+#| name: data-structure
 
 # Find the dimensions.
 dim(data)
@@ -187,8 +188,6 @@ day, and compliance.
 
 ```{r}
 #| name: descriptive-stats-compliance
-#| echo: true
-#| eval: true
 
 # Get the number of assessment per day.
 table(data$PID)
@@ -207,8 +206,6 @@ person-level or time-invariant variables variables.
 
 ```{r}
 #| name: descriptive-stats-time-invariant-variables
-#| echo: true
-#| eval: true
 
 # We create a data set that will aggregate the data by the time invariant
 # variables, i.e., the MDD diagnosis and QIDS depression score.
@@ -231,8 +228,6 @@ visualization and descriptive statistics
 
 ```{r}
 #| name: descriptive-stats-time-variant-variables
-#| echo: true
-#| eval: true
 #| fig-align: center
 #| warning: false
 
@@ -306,8 +301,6 @@ models we fit below.
 
 ```{r}
 #| name: data-preparation
-#| echo: true
-#| eval: true
 #| warning: false
 
 # Create lagged variables.
@@ -334,8 +327,6 @@ deviation using the function `sd()` on the residuals of the fitted model.
 
 ```{r}
 #| name: ar-model-pa
-#| echo: true
-#| eval: true
 #| warning: false
 
 # Fit AR(1) model for PA.
@@ -358,8 +349,6 @@ function `cov()` on the residuals of each of the fitted models.
 
 ```{r}
 #| name: var-model-pa-na
-#| echo: true
-#| eval: true
 #| warning: false
 
 # Linear regression model for PA.
@@ -392,8 +381,6 @@ each of the fitted models.
 
 ```{r}
 #| name: var-model-pa-na-anhedonia
-#| echo: true
-#| eval: true
 #| warning: false
 
 # Linear regression model for PA.
@@ -545,8 +532,6 @@ purposes.
 :::{.code-font-small}
 ```{r}
 #| name: session-info
-#| echo: true
-#| eval: true
 #| warning: false
 
 # Session information.
