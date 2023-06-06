@@ -44,11 +44,11 @@ website:
             text: Simulation-based power for $N = 1$ intensive designs
           - href: exercises/sample-size-solutions-n-1-intensive-designs.Rmd
             text: Sample size solutions for $N = 1$ intensive designs
-          - href: exercises/estimation-multilevel-leuven-clinical-data.md
+          - href: exercises/estimation-multilevel-leuven-clinical-data.Rmd
             text: Multilevel model estimation using the Leuven Clinical Dataset
-          - href: exercises/power-multilevel-cross-level-interaction-intensive-designs.md
+          - href: exercises/power-multilevel-cross-level-interaction-intensive-designs.Rmd
             text: Power for multilevel cross-level interaction intensive designs
-          - href: exercises/power-multilevel-ar-intensive-designs.md
+          - href: exercises/power-multilevel-ar-intensive-designs.Rmd
             text: Power for multilevel $\text{AR}(1)$ intensive designs
           - href: exercises/sample-size-analysis-powerly.qmd
             text: Sample size analysis using `powerly`
