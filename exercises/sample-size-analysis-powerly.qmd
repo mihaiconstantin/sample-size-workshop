@@ -1,7 +1,7 @@
 ---
 title: "Sample size analysis using `powerly`"
 author:
-  - Mihai A. Constantin
+  - "[Mihai A. Constantin](/presenters/mihai-constantin.md)"
 date: today
 toc: true
 format:

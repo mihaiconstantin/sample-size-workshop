@@ -1,9 +1,9 @@
 ---
 title: "Sample size solutions for $N = 1$ intensive longitudinal designs"
 author:
-  - Ginette Lafit
-  - Jordan Revol
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+  - "[Ginette Lafit](/presenters/ginette-lafit.md)"
+  - "[Jordan Revol](/presenters/jordan-revol.md)"
+date: today
 toc: true
 format:
     html: default
