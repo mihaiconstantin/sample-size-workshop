@@ -9,6 +9,8 @@ project:
   output-dir: docs
   resources:
     - assets/images/website-card.jpg
+    - assets/library/bibliography.bib
+    - assets/library/apa.csl
 website:
   title: "Sample Size Help"
   description: |
@@ -38,14 +40,16 @@ website:
             text: "Advanced methods for sample size planning"
       - text: Exercises
         menu:
-          - href: exercises/power-analysis-var-1.Rmd
-            text: Simulation-based power for $\text{AR}(1)$ and $\text{VAR}(1)$
-          - href: exercises/sample-size-solutions-n-1.Rmd
+          - href: exercises/power-simulation-n-1-intensive-designs.Rmd
+            text: Simulation-based power for $N = 1$ intensive designs
+          - href: exercises/sample-size-solutions-n-1-intensive-designs.Rmd
             text: Sample size solutions for $N = 1$ intensive designs
-          - href: exercises/exercises.md
-            text: "Simulation-based power analysis for multilevel models"
-          - href: exercises/exercises.md
-            text: "Analytical-based power analysis for multilevel models"
+          - href: exercises/estimation-multilevel-leuven-clinical-data.Rmd
+            text: Multilevel model estimation using the Leuven Clinical Dataset
+          - href: exercises/power-multilevel-cross-level-interaction-intensive-designs.Rmd
+            text: Power for multilevel cross-level interaction intensive designs
+          - href: exercises/power-multilevel-ar-intensive-designs.Rmd
+            text: Power for multilevel $\text{AR}(1)$ intensive designs
           - href: exercises/sample-size-analysis-powerly.qmd
             text: Sample size analysis using `powerly`
       - text: Presenters
@@ -74,3 +78,5 @@ format:
       light: cosmo
     css: assets/css/styles.css
     toc: false
+bibliography: assets/library/bibliography.bib
+csl: assets/library/apa.csl

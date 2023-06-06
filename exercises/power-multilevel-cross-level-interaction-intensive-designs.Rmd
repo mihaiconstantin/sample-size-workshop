@@ -1,0 +1,338 @@
+---
+title: Power Analysis for Multilevel Models With Cross-level Interactions in Intensive Longitudinal Designs
+author:
+  - "[Ginette Lafit](/presenters/ginette-lafit.md)"
+date: today
+toc: true
+format:
+    html: default
+    pdf: default
+execute:
+    freeze: auto
+    eval: true
+    echo: true
+---
+
+## Setting things up
+
+Before we proceed, we need to ensure we have several packages installed and
+loaded into our `R` session. For the scripts below, we will use the following
+packages:
+
+- [`tidyverse`](https://CRAN.R-project.org/package=tidyverse)
+- [`gridExtra`](https://CRAN.R-project.org/package=gridExtra)
+- [`formattable`](https://CRAN.R-project.org/package=formattable)
+- [`htmltools`](https://CRAN.R-project.org/package=htmltools)
+- [`shiny`](https://CRAN.R-project.org/package=shiny)
+- [`DT`](https://CRAN.R-project.org/package=DT)
+- [`ggplot2`](https://CRAN.R-project.org/package=ggplot2)
+- [`plyr`](https://CRAN.R-project.org/package=plyr)
+- [`dplyr`](https://CRAN.R-project.org/package=dplyr)
+- [`tidyr`](https://CRAN.R-project.org/package=tidyr)
+- [`shinyjs`](https://CRAN.R-project.org/package=shinyjs)
+- [`shinythemes`](https://CRAN.R-project.org/package=shinythemes)
+- [`viridis`](https://CRAN.R-project.org/package=viridis)
+- [`plotly`](https://CRAN.R-project.org/package=plotly)
+- [`remotes`](https://CRAN.R-project.org/package=remotes)
+- [`nlme`](https://CRAN.R-project.org/package=nlme)
+- [`devtools`](https://CRAN.R-project.org/package=devtools)
+- [`data.table`](https://CRAN.R-project.org/package=data.table)
+- [`MASS`](https://CRAN.R-project.org/package=MASS)
+- [`compiler`](https://CRAN.R-project.org/package=compiler)
+- [`future.apply`](https://CRAN.R-project.org/package=future.apply)
+
+Which we can install in one go as follows:
+
+```{r}
+#| name: install-packages
+#| echo: true
+#| eval: false
+#| warning: false
+
+# Prepare the package list.
+packages = c(
+    "tidyverse", "gridExtra", "formattable", "htmltools", "shiny",
+    "DT", "ggplot2", "plyr", "dplyr", "tidyr", "shinyjs", "shinythemes",
+    "viridis", "plotly", "remotes", "nlme", "devtools", "data.table",
+    "MASS", "compiler", "future.apply"
+)
+
+# Install packages.
+install.packages(packages)
+```
+
+::: {.callout-tip}
+You may consider first checking if the packages are installed before
+actually installing them. Nevertheless, the code above will not reinstall
+packages that are already installed and up-to-date.
+:::
+
+At last, we can load the packages into our `R` session:
+
+```{r}
+#| name: load-packages
+#| echo: true
+#| eval: false
+#| warning: false
+
+# Load packages.
+library(tidyverse)
+library(gridExtra)
+library(formattable)
+library(htmltools)
+library(shiny)
+library(DT)
+library(ggplot2)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(shinyjs)
+library(shinythemes)
+library(viridis)
+library(plotly)
+library(remotes)
+library(nlme)
+library(devtools)
+library(data.table)
+library(MASS)
+library(compiler)
+library(future.apply)
+```
+
+## Description
+
+The goal of this exercise is to conduct a power analysis to select the number of
+persons to investigate if depression moderates the relationship between
+anhedonia and negative affect (NA).
+
+To estimate this research question we will use a multilevel model with a
+cross-level interaction effect between a level 1 continuous predictor
+(anhedonia) and level 2 continuos predictor (depression):
+
+\begin{multline}
+    \text{NA}_{it} = \beta_{00} + \beta_{01} \text{Depression}_{i} + \beta_{10} \text{Anhedonia}_{it} +\\
+        \beta_{01} \text{Depression}_{i}\text{Anhedonia}_{it} +
+        \nu_{0i} + \nu_{1i} \text{Anhedonia}_{it}  + \epsilon_{it}
+\end{multline}
+
+where $\beta_{00}$ is the fixed intercept, $\beta_{01}$ represents the main
+effect of *depression*, $\beta_{10}$ is the fixed slope of *anhedonia*, and
+$\beta_{11}$ represents the cross-level interaction effect between *anhedonia*
+and *depression*. The cross-level interaction effect assesses whether
+*depression* moderates the effect of *anhedonia* on NA. The level 1 predictor
+(i.e., *anhedonia*) is centered within-persons and within-days.
+
+In this model, we account for the serial dependency that characterizes IL
+designs by assuming that the level 1 errors follow an autoregressive
+$\text{AR}(1)$ process [see @goldstein1994multilevel]:
+
+$$
+\epsilon_{it} = \rho_\epsilon \epsilon_{it-1} + \varepsilon_{it}
+$$
+
+where the correlation between two consecutive errors is denoted by
+$\rho_\epsilon$, and $\varepsilon_{it}$ is a Gaussian error with mean zero and
+variance $\sigma_\epsilon^2$. Under this model, the variance of the level 1
+errors is given by $\sigma_\epsilon^2/(1-\rho_\epsilon^2)$. To guarantee that
+this model is stationary, the autocorrelation $\rho_\epsilon$ should range
+between -1 and 1 [@hamilton1994time].
+
+Between-person differences in the relation between *anhedonia* and NA are captured
+by including a random intercept $\nu_{0i}$ and random slope $\nu_{1i}$. These
+random effects are multivariate normal distributed with mean zero and covariance
+matrix $\Sigma_\nu$:
+
+$$
+\boldsymbol{\Sigma}_\nu = \begin{bmatrix}
+\sigma_{\nu_{0}}^2 & \sigma_{\nu_{01}}  \\
+\sigma_{\nu_{01}} & \sigma_{\nu_{1}}^2
+\end{bmatrix}
+$$
+
+In this model, it is also assumed that the level 2 random effects and the Level
+1 errors are independent.
+
+To investigate if depression moderates the relationship between anhedonia and NA
+we are going to conduct the following hypothesis test:
+
+$$
+H_0: \beta_{11} = 0
+$$
+
+$$
+H_1: \beta_{11} \neq 0
+$$
+
+The aim of this exercise is to select the number of participants assuming the
+number of repeated measurements occasions to $T = 70$.
+
+- Select sample size using the analytic approach, e.g., $N = \{20, 40, ...\}$.
+- Compare the results with the ones obtained using the simulation-based approach.
+
+## Determining model parameter values
+
+To obtain the values of the model parameters we will use data from the Leuven
+clinical study. The code to estimate the multilevel model with cross-level
+interaction effect is included in the exercise
+[`Multilevel model estimation using the Leuven Clinical Dataset`](estimation-multilevel-leuven-clinical-data.Rmd).
+The output of the fitted model is:
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/fit-multilevel-model-example-2.png)
+
+Thus, the values of the model parameter that will be used to conduct the power
+analysis are:
+
+$$
+\begin{aligned}
+    \beta_{00} &= 42.98 \; \; \; \text{fixed intercept} \\
+    \beta_{01} &= 1.53 \; \; \; \text{main effect of depression} \\
+    \beta_{10} &= 0.14 \; \; \; \text{fixed slope} \\
+    \beta_{10} &= -0.01 \; \; \; \text{cross-level interaction effect} \\
+    \sigma_\epsilon &= 11.92 \; \; \; \text{std. deviation level 1 errors} \\
+    \rho_\epsilon &= 0.43 \; \; \; \text{std. deviation level 1 errors} \\
+    \sigma_{\nu_0} &= 12.86 \; \; \; \text{std. deviation random intercept} \\
+    \sigma_{\nu_1} &= 0.11 \; \; \; \text{std. deviation random slope} \\
+    \rho_{\nu_{01}} &= 0.249 \; \; \; \text{correlation between the random effects} \\
+    \mu_\text{Anhedonia} &= 51.66 \; \; \; \text{mean anhedonia} \\
+    \sigma_\text{Anhedonia} &= 23.67 \; \; \; \text{std. deviation anhedonia} \\
+    \mu_\text{Depression} &= 15.71 \; \; \; \text{mean anhedonia} \\
+    \sigma_\text{Depression} &= 5.00 \; \; \; \text{std. deviation anhedonia}
+\end{aligned}
+$$
+
+## Analytical-based power analysis
+
+To conduct the power analysis using the analytic approach we are going to use
+`ApproxPowerIL`: a `Shiny` application and `R` package to perform power analysis
+to select the number of persons for multilevel models with auto-correlated
+errors using asymptotic approximations of the information matrix The repository
+contains functions used in @lafit2023enabling. Users can download the app and
+run locally on their computer by executing the following commands in `R` or
+`RStudio` at
+[ApproxPowerIL](https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0119584/ApproxPowerIL).
+
+```{r}
+#| name: approx-power-il-app
+#| echo: true
+#| eval: false
+#| warning: false
+
+# Install the app package from the `GitHub` repository.
+remotes::install_github("ginettelafit/ApproxPowerIL", force = TRUE)
+
+# Load package `ApproxPowerIL`.
+library(ApproxPowerIL)
+
+# Lunch the app from the `GitHub` gist.
+shiny::runGist('302737dc046b89b7f09d15843389161c')
+```
+
+### Step 1
+
+**Select the model and set the sample size in the `ApproxPowerIL` application.**
+
+- Indicate the model of interest.
+- Input the number of participants $N$ (comma-separated): $N = \{ 20, 40, 60, 80, 100 \}$.
+- Input the number of repeated measurement occasions: $T = 70$.
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-approx-il-ex-1-1.png){width=60%}
+
+### Step 2
+
+**Set the value of the model parameters in the `ApproxPowerIL` application.**
+
+Use the screenshots below to guide you through the process:
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-approx-il-ex-1-2.png){width=60%}
+
+And, for the remainder of the parameters:
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-approx-il-ex-1-3.png){width=60%}
+
+
+### Step 3
+
+**Inspect the results.**
+
+Statistical power is higher than 90% when the number of participants is equal to
+or higher than $20$.
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-approx-il-ex-1-4.png)
+
+## Simulation-based power analysis
+
+To conduct the power analysis using the simulation-based approach we are going
+to use `PowerAnalysisIL`: a `Shiny` application and `R` package to perform power
+analysis to select the number of persons for multilevel models using the
+simulation-based approach.
+
+download the app and run locally on their computer by executing the following
+The repository contains functions used in @lafit2021selection. Users can
+commands in `R` or `RStudio` at
+[PowerAnalysisIL](https://github.com/ginettelafit/PowerAnalysisIL).
+
+```{r}
+#| name: simulation-power-il-app
+#| echo: true
+#| eval: false
+#| warning: false
+
+# Install the app package from the `GitHub` repository.
+library(devtools)
+devtools::install_github("ginettelafit/PowerAnalysisIL", force = TRUE)
+
+## Load package `PowerAnalysisIL`.
+library(PowerAnalysisIL)
+
+# Lunch the app from the `GitHub` gist.
+shiny::runGist('6bac9d35c2521cc4fd91ce4b82490236')
+```
+
+### Step 1
+
+**Select the model and set the sample size in the `PowerAnalysisIL` application.**
+
+- Indicate the model of interest.
+- Input the number of participants $N$ (comma-separated): $N = \{ 20, 40, 60, 80, 100 \}$.
+- Input the number of repeated measurement occasions: $T = 70$.
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-analysis-il-ex-1-1.png){width=60%}
+
+### Step 2
+
+**Set the value of the model parameters in the `PowerAnalysisIL` application.**
+
+Use the screenshots below to guide you through the process:
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-analysis-il-ex-1-2.png){width=60%}
+
+And, for the remainder of the parameters:
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-analysis-il-ex-1-3.png){width=60%}
+
+### Step 3
+
+**Inspect the results.**
+
+Statistical power is higher than 90% when the number of participants is equal to
+or higher than $20$.
+
+![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/power-analysis-il-ex-1-4.png)
+
+## Session information
+
+Using the command below, we can print the `session` information (i.e., operating
+system, details about the `R` installation, and so on) for reproducibility
+purposes.
+
+:::{.code-font-small}
+```{r}
+#| name: session-info
+#| warning: false
+
+# Session information.
+sessionInfo()
+```
+:::
+
+## References

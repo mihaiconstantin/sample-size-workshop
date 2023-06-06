@@ -18,8 +18,26 @@ main.content {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     border-radius: 0.5rem;
     padding: 0.5rem;
+    max-width: 95%;
+}
+
+figcaption {
+    text-align: center;
 }
 
 #modules table, #given-at table {
     vertical-align: middle;
+}
+
+.sourceCode, .cell-output {
+    font-size: 0.8rem;
+}
+
+.code-font-small .cell-output {
+    font-size: 0.75rem;
+}
+
+.todo {
+    color: darkred;
+    font-weight: bold;
 }

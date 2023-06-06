@@ -1,0 +1,502 @@
+---
+title: Simulation-based power analysis for $N = 1$ intensive longitudinal designs
+author:
+  - "[Ginette Lafit](/presenters/ginette-lafit.md)"
+  - "[Jordan Revol](/presenters/jordan-revol.md)"
+date: today
+toc: true
+format:
+    html: default
+    pdf: default
+execute:
+  freeze: auto
+---
+
+## Settings things up
+
+Before we proceed, we need to ensure we have several packages installed and
+loaded into our `R` session. For the scripts below, we will use the following
+packages:
+
+- [`data.table`](https://CRAN.R-project.org/package=data.table)
+- [`psych`](https://CRAN.R-project.org/package=psych)
+- [`tidyverse`](https://CRAN.R-project.org/package=tidyverse)
+- [`MASS`](https://CRAN.R-project.org/package=MASS)
+- [`stringr`](https://CRAN.R-project.org/package=stringr)
+
+Which we can install in one go as follows:
+
+```{r}
+#| name: install-packages
+#| echo: true
+#| eval: false
+#| warning: false
+
+# Prepare the package list.
+packages = c("data.table", "psych", "tidyverse", "MASS", "stringr")
+
+# Install packages.
+install.packages(packages)
+```
+
+::: {.callout-tip}
+You may consider first checking if the packages are installed before
+actually installing them. Nevertheless, the code above will not reinstall
+packages that are already installed and up-to-date.
+:::
+
+Now that we have all packages installed, we continue by loading them.
+
+```{r chunk-libraries, echo=TRUE, warning=TRUE, results="hide", message=FALSE}
+# To create lagged outcome variables.
+library(data.table)
+
+# To compute descriptive statistics.
+library(psych)
+
+# A useful package.
+library(tidyverse)
+
+# Handy functions for data analysis.
+library(MASS)
+
+# For handy string manipulation.
+library(stringr)
+
+# Set a seed for reproducibility.
+set.seed(123)
+```
+
+## Preparing the simulation functions
+
+We need two functions to conduct a simulation-based power analysis.
+
+- one function that generates the datasets for the simulation
+- and a second function that runs the Monte Carlo simulation to estimate the
+  *empirical power*
+
+### The data generating function
+
+This function generates a dataset from an $\text{VAR}(1)$ model and takes a few
+arguments as follows:
+
+- `vars` is the number of variables of the $\text{VAR}(1)$ model
+- `Tobs` is the number of repeated measurements
+- `delta` the intercept matrix
+- `psi` the transition matrix (i.e., containing the auto-regressive and
+  cross-regressive effects)
+- `sigma` the variance-covariance matrix of the innovation
+
+```{r}
+#| name: data-generating-function
+#| echo: true
+#| eval: true
+
+# Function to generate data from a `VAR(1)` model.
+sim_VAR_data <- function(vars, Tobs, delta, psi, sigma) {
+    # Number of burning observations.
+    T.burning <- 10000
+
+    # Define the number of observations.
+    T.total <- T.burning + Tobs
+
+    # Simulate errors.
+    if (vars == 1) {
+        E <- as.matrix(rnorm(T.total, 0, sigma))
+    } else {
+        E <- mvrnorm(T.total, mu = rep(0, vars), sigma)
+    }
+
+    # Recursive equation.
+    Y <- matrix(0, T.total, vars)
+
+    # Initialized values.
+    Y[1, ] <- delta + E[1, ]
+
+    # Simulate dependent variables.
+    for (t in 2:T.total) {
+        Y[t, ] <- delta + psi %*% Y[t - 1, ] + E[t, ]
+    }
+
+    # Exclude burning observations.
+    Y <- Y[-seq(1:T.burning), ]
+
+    # Create lagged variables.
+    Y <- cbind(Y, lag(Y))
+
+    # Rename variables.
+    colnames(Y) <- c(sprintf("Y%d", seq(1:vars)), sprintf("Y%dlag", seq(1:vars)))
+
+    # Return the data.
+    return(as.data.frame(Y))
+}
+```
+
+### The Monte Carlo simulation function
+
+This function conducts the Monte Carlo simulation for a set of sample sizes
+(i.e., several different number of observations) and computes the statistical
+power for a given hypothesis. It takes several arguments as follows:
+
+- `vars` is the number of variables of the $\text{VAR}(1)$ model
+- `Tobs_list` is a list of numbers of repeated measurements (i.e., `Tobs`)
+- `delta` the intercept matrix
+- `psi` the transition matrix (which contains the auto-regressive and
+  cross-regressive effects)
+- `sigma` the variance-covariance matrix of the innovation
+- `R` is the number of Monte Carlo replicates (e.g., $1000$)
+- `alpha` is the Type I error rate (or significance level of a test statistic)
+
+```{r}
+#| name: monte-carlo-simulation-function
+#| echo: true
+#| eval: true
+
+# Function to conduct the Monte Carlo power simulation.
+mc_power <- function(vars, Tobs_list, delta, psi, sigma, R, alpha) {
+    # Prepare simulation storage.
+    df_pow <- data.frame()
+
+    # For each sample size in the list.
+    for (i in 1:length(Tobs_list)) {
+        # Extract the sample size.
+        Tobs <- Tobs_list[i]
+
+        # Print the progress.
+        print(paste0("Power analysis for N = ", Tobs))
+
+        # For each Monte Carlo replication.
+        for (r in 1:R) {
+            # Generate data.
+            data <- sim_VAR_data(vars, Tobs, delta, psi, sigma)
+
+            # Create names lists.
+            var_names <- sprintf("Y%d", seq(1:vars))
+            lag_names <- sprintf("Y%dlag", seq(1:vars))
+
+            # Prepare storage for the model fits.
+            list_pow_rep <- list()
+
+            # For each variable in the model.
+            for (nbName in 1:length(var_names)) {
+                # Extract variable name.
+                name_ <- var_names[nbName]
+
+                # Create the formula for the linear regression.
+                formula <- as.formula(
+                    paste(name_, paste(lag_names, collapse = " + "), sep = " ~ ")
+                )
+
+                # Estimate model.
+                model <- lm(formula, data)
+
+                # Extract the coefficients.
+                coefficients <- summary(model)$coefficients
+
+                # Extract the `p` values.
+                df_pval <- as.data.frame(rbind(coefficients[, 4]))
+
+                # Compute the empirical power.
+                list_pow_rep[[nbName]] <- as.data.frame(df_pval < alpha)
+
+                # Add names to the columns.
+                names(list_pow_rep[[nbName]]) <- c(paste0("pow_int_", name_), paste0("pow_", lag_names, "_", name_))
+            }
+
+            # Bind the columns.
+            rep_data <- bind_cols(
+                data.frame(Tobs = Tobs), do.call(cbind, list_pow_rep)
+            )
+
+            # Bind the rows.
+            df_pow <- rbind(df_pow, rep_data)
+        }
+    }
+
+    # Compute empirical power.
+    df_pow <- aggregate(
+        df_pow[, 2:ncol(df_pow)], list(df_pow$Tobs), mean
+    )
+
+    # Rename the columns.
+    df_pow <- rename(df_pow, Tobs = Group.1)
+
+    return(df_pow)
+}
+```
+
+## Conducting the simulation power analysis
+
+To conduct the simulation-based power analysis you first need to set the
+following arguments:
+
+- `Tobs`: list of numbers of repeated measurements.
+- `vars`: number of variables of the $\text{VAR}(1)$ model.
+- `delta`: a $\text{vars} \times 1$ matrix with one intercept per variable.
+- `psi`: a $\text{vars} \times \text{vars}$ matrix. The diagonal elements are
+  the autoregressive coefficients, and the off-diagonal are the cross-regressive
+  coefficients.
+- `sigma`: a $\text{vars} \times \text{vars}$ matrix. The diagonal elements are
+  the variance of the residuals, and the off-diagonal elements are the
+  covariance values. Note that the matrix should be symmetric.
+- `alpha`: type I error rate (i.e., conventionally set at $.05$).
+- `R`: the number of Monte Carlo replicates (i.e., $1000$).
+- `pow_target`: the empirical power targeted, which is often $.8$. This variable
+  is only used in the results (not in the simulation).
+
+For the reminder of this document, we demonstrate how to run a simulation-based
+power analysis for the $\text{AR}(1)$ and $\text{VAR}(1)$ models.
+
+### Simulation for the $\text{AR}(1)$ model
+
+We ran a simulation for an $\text{AR}(1)$ model with $\text{Tobs} = \{50, 100,
+150\}$, specified as follows:
+
+$$
+y_{t} = 3 + .3 * y_{t-1} + \varepsilon
+$$
+
+with:
+
+$$
+\varepsilon \sim N(0, 10)
+$$
+
+::: {.callout-important}
+In the example below we set the number of Monte Carlo replicates to `R = 10` to
+speed up the computation and the generation of this document. In practice, you
+should set **at lest** `R = 1000` to obtain reliable results. Make sure to
+change it accordingly when you run the code.
+:::
+
+```{r}
+#| name: simulation-ar
+#| echo: true
+#| eval: true
+
+# Specify the simulation inputs.
+Tobs_list <- c(50, 100, 150)
+vars <- 1
+delta <- as.matrix(3)
+psi <- as.matrix(.3)
+sigma <- as.matrix(10)
+alpha <- 0.05
+R <- 10
+pow_target <- .8
+
+# Run the power analysis simulation.
+df_pow_result <- mc_power(vars, Tobs_list, delta, psi, sigma, R, alpha)
+```
+
+With the simulation completed, we can continue to display the results of the
+power analysis in a plot and a recapitulation table.
+
+```{r}
+#| name: simulation-ar-plot
+#| echo: true
+#| eval: true
+#| fig-align: center
+
+# Prepare the results data for the plot.
+dt <- df_pow_result %>%
+    gather(Coef_power, power, starts_with("pow"))
+
+# Rename.
+dt$Coef_power = stringr::str_replace_all(
+    dt$Coef_power, c("pow_" = "", "_" = " -> ")
+)
+
+# Plot the results of the `AR(1)` power analysis.
+ggplot(dt,
+    aes(
+        y = power,
+        x = Tobs,
+        color = Coef_power
+    )) +
+    geom_line() +
+    geom_hline(
+        yintercept = pow_target,
+        color = "red",
+        linetype = 2
+    ) +
+    scale_y_continuous(
+        breaks = seq(0, 1, by = .1),
+        limits = c(0, 1)
+    ) +
+    labs(
+        y = "Power",
+        x = "Time points"
+    ) +
+    theme_classic()
+```
+
+Finally, we can display the results in a table as shown below.
+
+```{r}
+#| name: simulation-ar-table
+#| echo: true
+#| eval: true
+
+# Create table of outputs.
+dt = df_pow_result %>%
+    gather(pow, value, starts_with("pow")) %>%
+    spread(Tobs, value)
+
+# Rename variables.
+dt$pow <- stringr::str_replace_all(dt$pow, c("pow_"="", "_"=" -> "))
+
+# Rename the columns.
+names(dt)[1] <- "Coefficients"
+
+# Print the table.
+print(dt)
+```
+
+### Simulation for the $\text{VAR}(1)$ model
+
+We ran a simulation for a $\text{VAR}(1)$ model with three variables and
+$\text{Tobs} = \{50, 100, 150\}$, specified as follows:
+
+$$
+    \begin{bmatrix} y_{1t} \\ y_{2t} \\ y_{3t} \end{bmatrix} =
+    \begin{bmatrix} 4 \\ 6 \\ 10 \end{bmatrix} +
+    \begin{bmatrix} 0.5 \ 0.14 \ .2 \\ 0.1 \ 0.4 \ .03 \\ 0.05 \ 0.12 \ .6 \end{bmatrix}
+    \begin{bmatrix} y_{1, t-1} \\ y_{2, t-1} \\ y_{3, t-1} \end{bmatrix} +
+    \begin{bmatrix} \varepsilon_{1t} \\ \varepsilon_{2t} \\ \varepsilon_{3t} \end{bmatrix}
+$$
+
+with:
+
+$$
+    \begin{bmatrix} \varepsilon_{1t} \\ \varepsilon_{2t} \\ \varepsilon_{3t} \end{bmatrix} \sim
+    N \Bigg( \begin{bmatrix} 0 \\ 0 \end{bmatrix} , \begin{bmatrix} 15 \ 3 \ 6 \\ 3 \ 20 \ 9 \\ 6 \ 9 \ 18  \end{bmatrix} \Bigg)
+$$
+
+Let's start by setting the values for the simulation. Check out the
+documentation for the [`mc_power`](#the-monte-carlo-simulation-function)
+function for more details on the inputs.
+
+::: {.callout-important}
+Just like before, in the example below we set the number of Monte Carlo
+replicates to `R = 10` to speed up the computation and the generation of this
+document. In practice, you should set **at lest** `R = 1000` to obtain reliable
+results. Make sure to change it accordingly when you run the code.
+:::
+
+```{r}
+#| name: simulation-ar-table
+#| echo: true
+#| eval: true
+
+# Set the values for conducting the power analysis.
+Tobs_list = c(50, 100, 150)
+vars = 3
+delta = as.matrix(c(4, 6, 10))
+psi = rbind(
+    c(.50, .14, .20),
+    c(.10, .40, .03),
+    c(.05, .12, .50)
+)
+sigma = rbind(
+    c(15,  3,  6),
+    c( 3, 20,  9),
+    c( 6,  9, 18)
+)
+alpha = 0.05
+R = 10
+pow_target = .8
+
+# Run the power analysis simulation.
+df_pow_result <- mc_power(vars, Tobs_list, delta, psi, sigma, R, alpha)
+```
+
+We can continue to display the results of the power analysis in a plot and then
+summarize them in a table.
+
+```{r}
+#| name: simulation-var-plot
+#| echo: true
+#| eval: true
+#| fig-align: center
+
+# Prepare the results data for the plot.
+dt = df_pow_result %>%
+    gather(
+        Coef_power, power, starts_with("pow")
+    )
+
+# Rename the variables.
+dt$Coef_power = stringr::str_replace_all(
+    dt$Coef_power, c("pow_" = "", "_" = " -> ")
+)
+
+# Plot the results of the power analysis.
+ggplot(dt,
+    aes(
+        y = power,
+        x = Tobs,
+        color = Coef_power
+    )) +
+    geom_line() +
+    geom_hline(
+        yintercept = pow_target,
+        color = "red",
+        linetype = 2
+    ) +
+    scale_y_continuous(
+        breaks = seq(0, 1, by = .1),
+        limits = c(0, 1)
+    ) +
+    labs(
+        y = "Power",
+        x = "Time points"
+    ) +
+    theme_classic()
+```
+
+```{r}
+#| name: simulation-var-table
+#| echo: true
+#| eval: true
+
+# Create table of outputs.
+dt = df_pow_result %>%
+    gather(
+        pow,
+        value,
+        starts_with("pow")
+    ) %>%
+    spread(
+        Tobs,
+        value
+    )
+
+# Rename the variables.
+dt$pow <- stringr::str_replace_all(
+    dt$pow, c("pow_" = "", "_" = " -> ")
+)
+
+# Rename the columns.
+names(dt)[1] <- "Coefficients"
+
+# Print the table.
+print(dt)
+```
+
+## Session information
+
+Using the command below, we can print the `session` information (i.e., operating
+system, details about the `R` installation, and so on) for reproducibility
+purposes.
+
+:::{.code-font-small}
+```{r}
+#| name: session-info
+#| echo: true
+#| eval: true
+#| warning: false
+
+# Session information.
+sessionInfo()
+```
+:::
