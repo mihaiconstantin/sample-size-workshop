@@ -13,6 +13,8 @@ execute:
     echo: true
 ---
 
+[This file needs attention!]{.todo}
+
 ## Settings things up
 
 Before we proceed, we need to ensure we have several packages installed and
@@ -51,8 +53,8 @@ Which we can install in one go as follows:
 packages = c(
     "htmltools", "DT", "nlme", "ggplot2", "gridExtra",
     "data.table", "plyr", "dplyr", "formattable", "tidyr",
-    "MASS", "compiler", "kableExtra", "future.apply",
-    "tictoc", "viridis", "ggpubr", "devtools"
+    "MASS", "kableExtra", "future.apply", "tictoc",
+    "viridis", "ggpubr", "devtools"
 )
 
 # Install packages.
@@ -85,7 +87,6 @@ library(dplyr)
 library(formattable)
 library(tidyr)
 library(MASS)
-library(compiler)
 library(future.apply)
 library(tictoc)
 library(kableExtra)
@@ -181,7 +182,7 @@ clinical study. The code to estimate the multilevel model is included in the exe
 [`Multilevel model estimation using the Leuven Clinical Dataset`](estimation-multilevel-leuven-clinical-data.Rmd).
 The output of the fitted model is:
 
-![[Ginette, can you please add the figure caption here?]{.todo}](../assets/images/fit-multilevel-model-example-3.png)
+![Estimated model parameter values](../assets/images/fit-multilevel-model-example-3.png)
 
 Thus, the values of the model parameter that will be used to conduct the power
 analysis are:
@@ -418,9 +419,6 @@ ggplot(Power.b11.power, aes(
 We now conduct a sensitivity analysis to assess how power varies under different
 conditions. This time, we focus on the scenario in which we varied the average
 compliance rate.
-
-[Ginette, Can you please take a look at the section above and the
-following?]{.todo}
 
 ### Varying the average compliance rate
 
