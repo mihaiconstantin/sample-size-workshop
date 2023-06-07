@@ -105,8 +105,8 @@ analysis using the `powerly` package at [powerly.dev](https://powerly.dev/).
 [3]: https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0119584/ApproxPowerIL
 
 <!-- Slide links. -->
-[slides-intensive]: slides/slides.md
-[slides-advanced]: slides/slides.md
+[slides-intensive]: slides/intensive-longitudinal.pdf
+[slides-advanced]: slides/advanced-methods.pdf
 
 <!-- Exercise links Jordan. -->
 [ex-n-1-power]: exercises/power-simulation-n-1-intensive-designs.Rmd
