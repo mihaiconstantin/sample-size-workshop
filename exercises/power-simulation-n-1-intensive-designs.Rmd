@@ -125,7 +125,10 @@ sim_VAR_data <- function(vars, Tobs, delta, psi, sigma) {
     Y <- cbind(Y, lag(Y))
 
     # Rename variables.
-    colnames(Y) <- c(sprintf("Y%d", seq(1:vars)), sprintf("Y%dlag", seq(1:vars)))
+    colnames(Y) <- c(
+        sprintf("Y%d", seq(1:vars)),
+        sprintf("Y%dlag", seq(1:vars))
+    )
 
     # Return the data.
     return(as.data.frame(Y))
@@ -200,7 +203,10 @@ mc_power <- function(vars, Tobs_list, delta, psi, sigma, R, alpha) {
                 list_pow_rep[[nbName]] <- as.data.frame(df_pval < alpha)
 
                 # Add names to the columns.
-                names(list_pow_rep[[nbName]]) <- c(paste0("pow_int_", name_), paste0("pow_", lag_names, "_", name_))
+                names(list_pow_rep[[nbName]]) <- c(
+                    paste0("pow_int_", name_),
+                    paste0("pow_", lag_names, "_", name_)
+                )
             }
 
             # Bind the columns.
