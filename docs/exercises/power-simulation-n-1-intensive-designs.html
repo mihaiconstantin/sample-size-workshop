@@ -4657,11 +4657,11 @@ font-weight: bold;
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-slides">    
         <li>
-    <a class="dropdown-item" href="../slides/slides.html" rel target>
+    <a class="dropdown-item" href="../slides/intensive-longitudinal.pdf" rel target>
  <span class="dropdown-text">Sample size planning for intensive longitudinal designs</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../slides/slides.html" rel target>
+    <a class="dropdown-item" href="../slides/advanced-methods.pdf" rel target>
  <span class="dropdown-text">Advanced methods for sample size planning</span></a>
   </li>  
     </ul>
@@ -4902,11 +4902,14 @@ Tip
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    Y <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Y, <span class="fu">lag</span>(Y))</span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename variables.</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(Y) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Y%d&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>vars)), <span class="fu">sprintf</span>(<span class="st">&quot;Y%dlag&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>vars)))</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the data.</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">as.data.frame</span>(Y))</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(Y) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;Y%d&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>vars)),</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sprintf</span>(<span class="st">&quot;Y%dlag&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>vars))</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the data.</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">as.data.frame</span>(Y))</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-monte-carlo-simulation-function" class="level3">
@@ -4970,29 +4973,32 @@ Tip
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                list_pow_rep[[nbName]] <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(df_pval <span class="sc">&lt;</span> alpha)</span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Add names to the columns.</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                <span class="fu">names</span>(list_pow_rep[[nbName]]) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;pow_int_&quot;</span>, name_), <span class="fu">paste0</span>(<span class="st">&quot;pow_&quot;</span>, lag_names, <span class="st">&quot;_&quot;</span>, name_))</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>            }</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Bind the columns.</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>            rep_data <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                <span class="fu">data.frame</span>(<span class="at">Tobs =</span> Tobs), <span class="fu">do.call</span>(cbind, list_pow_rep)</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Bind the rows.</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>            df_pow <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_pow, rep_data)</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute empirical power.</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    df_pow <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>        df_pow[, <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(df_pow)], <span class="fu">list</span>(df_pow<span class="sc">$</span>Tobs), mean</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename the columns.</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    df_pow <span class="ot">&lt;-</span> <span class="fu">rename</span>(df_pow, <span class="at">Tobs =</span> Group<span class="fl">.1</span>)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                <span class="fu">names</span>(list_pow_rep[[nbName]]) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">paste0</span>(<span class="st">&quot;pow_int_&quot;</span>, name_),</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">paste0</span>(<span class="st">&quot;pow_&quot;</span>, lag_names, <span class="st">&quot;_&quot;</span>, name_)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Bind the columns.</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            rep_data <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                <span class="fu">data.frame</span>(<span class="at">Tobs =</span> Tobs), <span class="fu">do.call</span>(cbind, list_pow_rep)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Bind the rows.</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            df_pow <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_pow, rep_data)</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute empirical power.</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    df_pow <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>        df_pow[, <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(df_pow)], <span class="fu">list</span>(df_pow<span class="sc">$</span>Tobs), mean</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(df_pow)</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Rename the columns.</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    df_pow <span class="ot">&lt;-</span> <span class="fu">rename</span>(df_pow, <span class="at">Tobs =</span> Group<span class="fl">.1</span>)</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(df_pow)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -5281,7 +5287,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] MASS_7.3-58.4     lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0    
+ [1] MASS_7.3-60       lubridate_1.9.2   forcats_1.0.0     stringr_1.5.0    
  [5] dplyr_1.1.2       purrr_1.0.1       readr_2.1.4       tidyr_1.3.0      
  [9] tibble_3.2.1      ggplot2_3.4.2     tidyverse_2.0.0   psych_2.3.3      
 [13] data.table_1.14.8

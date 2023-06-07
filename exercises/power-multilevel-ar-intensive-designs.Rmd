@@ -70,8 +70,6 @@ At last, we can load the packages into our `R` session:
 
 ```{r}
 #| name: load-packages
-#| echo: true
-#| eval: false
 #| warning: false
 #| message: false
 
@@ -104,7 +102,11 @@ because it contains the functions we will use to conduct the power analysis.
 
 # Install the shiny application package.
 devtools::install_github("ginettelafit/PowerAnalysisIL")
+```
 
+Which we can load into our `R` session as follows:
+
+```{r}
 ## Load package `PowerAnalysisIL`.
 library(PowerAnalysisIL)
 ```
@@ -284,8 +286,6 @@ value of the main effect of interest.
 
 ```{r}
 #| name: estimate-power-sensitivity-1
-#| echo: true
-#| eval: false
 #| warning: false
 
 # We investigate what happens with power when the main effect of interest is 10%
@@ -339,9 +339,8 @@ control group.
 
 ```{r}
 #| name: estimate-power-effect-size
-#| echo: true
-#| eval: false
 #| warning: false
+#| fig-align: center
 
 # Construct a matrix with the results of the sensitivity power analysis.
 Power.b11.power <- matrix(0, length(N.0), length(b11.Z.list))
@@ -423,8 +422,6 @@ compliance rate.
 
 ```{r}
 #| name: estimate-power-sensitivity-2
-#| echo: true
-#| eval: false
 #| warning: false
 
 # Average compliance rate.
@@ -477,9 +474,8 @@ control group.
 
 ```{r}
 #| name: estimate-power-time-point
-#| echo: true
-#| eval: false
 #| warning: false
+#| fig-align: center
 
 # Construct a matrix with the results of the sensitivity power analysis.
 Power.b11.power.Tpoints <- matrix(0, length(N.0), length(T.obs.list))

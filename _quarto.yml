@@ -11,6 +11,8 @@ project:
     - assets/images/website-card.jpg
     - assets/library/bibliography.bib
     - assets/library/apa.csl
+    - slides/intensive-longitudinal.pdf
+    - slides/advanced-methods.pdf
 website:
   title: "Sample Size Help"
   description: |
@@ -34,9 +36,9 @@ website:
         href: index.md
       - text: Slides
         menu:
-          - href: slides/slides.md
+          - href: slides/intensive-longitudinal.pdf
             text: "Sample size planning for intensive longitudinal designs"
-          - href: slides/slides.md
+          - href: slides/advanced-methods.pdf
             text: "Advanced methods for sample size planning"
       - text: Exercises
         menu:
