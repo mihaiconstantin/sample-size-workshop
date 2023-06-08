@@ -76,12 +76,12 @@ analysis using the `powerly` package at [powerly.dev](https://powerly.dev/).
 
 ## 📂 Modules
 
-| Topic                                                                                | Duration |                             Slides                             |                                                                                             Tutorial                                                                                              |
-| :----------------------------------------------------------------------------------- | :------: | :------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Introduction to sample size planning in intensive longitudinal research              |   45m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-intensive] |                                                                                                 -                                                                                                 |
-| Sample size planning for $\text{VAR}(1)$ models in $N = 1$ designs                   |   60m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-intensive] |                                 [[tutorial 1]{.badge .rounded-pill .bg-primary}][ex-n-1-power] [[tutorial 2]{.badge .rounded-pill .bg-primary}][ex-n-1-solutions]                                 |
-| Sample size planning for multilevel models applied to intensive longitudinal designs |   50m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-intensive] | [[tutorial 1]{.badge .rounded-pill .bg-primary}][ex-ml-estimation] [[tutorial 2]{.badge .rounded-pill .bg-primary}][ex-ml-interaction] [[tutorial 3]{.badge .rounded-pill .bg-primary}][ex-ml-ar] |
-| Advanced methods for sample size analysis                                            |   40m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-advanced]  |                                                                    [[tutorial]{.badge .rounded-pill .bg-primary}][ex-powerly]                                                                     |
+| Topic                                                                                | Duration |                              Slides                              |                                                                                             Tutorial                                                                                              |
+| :----------------------------------------------------------------------------------- | :------: | :--------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| Introduction to sample size planning in intensive longitudinal research              |   45m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-intensive-1] |                                                                                                 -                                                                                                 |
+| Sample size planning for $\text{VAR}(1)$ models in $N = 1$ designs                   |   60m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-intensive-2] |                                 [[tutorial 1]{.badge .rounded-pill .bg-primary}][ex-n-1-power] [[tutorial 2]{.badge .rounded-pill .bg-primary}][ex-n-1-solutions]                                 |
+| Sample size planning for multilevel models applied to intensive longitudinal designs |   50m    | [[slides]{.badge .rounded-pill .bg-primary}][slides-intensive-3] | [[tutorial 1]{.badge .rounded-pill .bg-primary}][ex-ml-estimation] [[tutorial 2]{.badge .rounded-pill .bg-primary}][ex-ml-interaction] [[tutorial 3]{.badge .rounded-pill .bg-primary}][ex-ml-ar] |
+| Advanced methods for sample size analysis                                            |   40m    |  [[slides]{.badge .rounded-pill .bg-primary}][slides-advanced]   |                                                                    [[tutorial]{.badge .rounded-pill .bg-primary}][ex-powerly]                                                                     |
 
 ## 📍 Given At
 
@@ -105,7 +105,9 @@ analysis using the `powerly` package at [powerly.dev](https://powerly.dev/).
 [3]: https://gitlab.kuleuven.be/ppw-okpiv/researchers/u0119584/ApproxPowerIL
 
 <!-- Slide links. -->
-[slides-intensive]: slides/intensive-longitudinal.pdf
+[slides-intensive-1]: slides/intensive-longitudinal.pdf
+[slides-intensive-2]: slides/intensive-longitudinal.pdf#page=23
+[slides-intensive-3]: slides/intensive-longitudinal.pdf#page=61
 [slides-advanced]: slides/advanced-methods.pdf
 
 <!-- Exercise links Jordan. -->
