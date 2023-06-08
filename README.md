@@ -13,6 +13,11 @@
     <a href="presenters/eva-ceulemans.md">Eva Ceulemans</a>
 </p>
 
+<!-- Badges. -->
+<p align="center">
+    <a href="https://doi.org/10.5281/zenodo.8015940"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.8015940.svg" alt="DOI"></a>
+</p>
+
 ## 📝 Description
 
 In recent years the popularity of procedures to collect intensive longitudinal
@@ -53,7 +58,7 @@ are required in order to optimize predictive accuracy.
 
 - Lafit, G., Revol, J., Constantin M. A., & Ceulemans, E. (2023). *Workshop on
   Sample Size Planning for Intensive Longitudinal Studies*.
-  https://00.0000/zenodo.0000000
+  [https://doi.org/10.5281/zenodo.8015940](https://doi.org/10.5281/zenodo.8015940)
 
 ## ⚖️ License
 
