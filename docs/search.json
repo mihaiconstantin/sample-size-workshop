@@ -326,7 +326,56 @@
     "href": "exercises/sample-size-analysis-powerly.html",
     "title": "Sample size analysis using powerly",
     "section": "",
-    "text": "See powerly.dev/tutorial."
+    "text": "Before we proceed, we need to install the powerly package and make it available in our R session.\n\n\n\n\n\n\nTip\n\n\n\nYou can find out more information about powerly at powerly.dev. Make sure to keep an eye on the website for updates and new features.\n\n\n\n# Install `powerly`.\ninstall.packages(\"powerly\")\n\nNow, we can go ahead and load the package into our session.\n\n# Load `powerly`.\nlibrary(powerly)\n\n\n\n\n\n\n\nTip\n\n\n\nLike always, it is a good idea to first check what packages you have installed before proceeding. Nevertheless, the command above will not reinstall packages that are already installed and up-to-date, i.e., unless we force this behavior."
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#settings-things-up",
+    "href": "exercises/sample-size-analysis-powerly.html#settings-things-up",
+    "title": "Sample size analysis using powerly",
+    "section": "",
+    "text": "Before we proceed, we need to install the powerly package and make it available in our R session.\n\n\n\n\n\n\nTip\n\n\n\nYou can find out more information about powerly at powerly.dev. Make sure to keep an eye on the website for updates and new features.\n\n\n\n# Install `powerly`.\ninstall.packages(\"powerly\")\n\nNow, we can go ahead and load the package into our session.\n\n# Load `powerly`.\nlibrary(powerly)\n\n\n\n\n\n\n\nTip\n\n\n\nLike always, it is a good idea to first check what packages you have installed before proceeding. Nevertheless, the command above will not reinstall packages that are already installed and up-to-date, i.e., unless we force this behavior."
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#description",
+    "href": "exercises/sample-size-analysis-powerly.html#description",
+    "title": "Sample size analysis using powerly",
+    "section": "Description",
+    "text": "Description\nIn this tutorial we are going to get familiar with the workflow of running a sample size analysis using powerly. While we will not use a time series model for the analysis (i.e., still work in progress 👀), we use an equally interesting and challenging example, i.e., a regularized network model. More specifically, we will learn how to run a sample size analysis for a Gaussian Graphical Model (GGM) estimated using the Least Absolute Shrinkage and Selection Operator (LASSO; Friedman et al., 2008) and the Extended Bayesian Information Criterion (EBIC; Foygel & Drton, 2010). If you are curios to learn more about this methodology, you can check out the paper by Epskamp & Fried (2018)."
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#selecting-the-true-model",
+    "href": "exercises/sample-size-analysis-powerly.html#selecting-the-true-model",
+    "title": "Sample size analysis using powerly",
+    "section": "Selecting the true model",
+    "text": "Selecting the true model\nLet’s start by selecting the network model that we will use as true model. In this case, our true model \\(\\mathbb{\\Theta}\\) takes the form a a \\(p \\times p\\) matrix of edge weights \\(\\theta_{ij}\\), where \\(p\\) is the number of nodes in the network. We can generate a true model using the generate_model() function provided by powerly.\n\n\n\n\n\n\nTip\n\n\n\nCheck out the documentation for generate_model() by running ?generate_model, or by visiting the package website.\n\n\n\n\n\n\n\n\nNote\n\n\n\nWe may also manually specify our true model matrix \\(\\mathbb{\\Theta}\\). However, this is a rather complicated task, since, in this case, \\(\\mathbb{\\Theta}\\) is a matrix of partial correlation coefficients that represents a complex interplay between the architecture of the network and the strength of the relationships between the nodes. For this reason, it is often more convenient to generate a true model using the generate_model() function based on some hyperparameters, such as the number of nodes, the edge density, and the proportion of positive edges in the network.\n\n\nSuppose we are interested in a GGM true model consisting of 10 nodes with an edge density of 0.4, and a proportion of positive edges of 0.9.\n\n\n\n\n\n\nNote\n\n\n\nWe may also set a seed to ensure that we all use the same true model.\n\n# Set the seed.\nset.seed(20031993)\n\n\n\n\n# To get a matrix of edge weights.\ntrue_model &lt;- generate_model(\n    type = \"ggm\",\n    nodes = 10,\n    density = .4,\n    positive = .9\n)\n\nLet’s continue by plotting our network to get a better idea of what it looks like. For this we can use the qgraph package (Epskamp et al., 2012).\n\n\n\n\n\n\nTip\n\n\n\nNote that you do not need to install qgraph since it is already a dependency of powerly. You can simply access its exported functions by using the qgraph:: prefix.\n\n\n\n# Plot the true model.\nqgraph::qgraph(\n    true_model,\n    layout = \"spring\",\n    theme = \"colorblind\"\n)\n\n\n\n\nThe GGM true model."
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#specifying-the-performance-measure-and-the-statistic",
+    "href": "exercises/sample-size-analysis-powerly.html#specifying-the-performance-measure-and-the-statistic",
+    "title": "Sample size analysis using powerly",
+    "section": "Specifying the performance measure and the statistic",
+    "text": "Specifying the performance measure and the statistic\nAs discussed in the lecture (i.e., Slides &gt; Sample size planning for intensive longitudinal designs), the choice of performance measure should be driven by the research question. For our example, let’s suppose we are interested in correctly recovering the network structure. This implies, that we may be interested in sensitivity, as the proportion of edges in the true network structure that were correctly estimated to be non-zero (i.e., present), which is defined as:\n\\[\n\\text{SEN} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}},\n\\]\nwhere represents the true positive rate, and the false negatives. As for the target value of the performance measure, let’s suppose we are interested in a SEN of 0.6.\nFinally, we need to specify the statistic, which is used to determined how we want to observe the performance measure. More specifically, suppose we are interested in obtaining a sample size that will allow us to detect a SEN of 0.6 with a probability of 0.8. In other words, if we are are to collect, say \\(100\\) data sets with the optimal sample size, we want to be able to detect a SEN of 0.6 in at least 80 of them.\nWe can specify the performance measure and the statistic in the powerly function using the measure and statistic arguments, respectively. And their corresponding target values using the measure_value and statistic_value arguments.\n\n\n\n\n\n\nTip\n\n\n\nCheck out the documentation of the powerly function for a detailed description of all the arguments. You can also use the ?powerly command in the R console to open the documentation."
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#running-the-sample-size-analysis",
+    "href": "exercises/sample-size-analysis-powerly.html#running-the-sample-size-analysis",
+    "title": "Sample size analysis using powerly",
+    "section": "Running the sample size analysis",
+    "text": "Running the sample size analysis\nAt this point, we have a good idea about the true model that we want to recover, the performance measure that we want to use, and the statistic that we want to use to observe the performance measure. We can now run the sample size analysis.\n\n# Run the sample size analysis.\nresults &lt;- powerly(\n    range_lower = 300,\n    range_upper = 1000,\n    samples = 30,\n    replications = 60,\n    measure = \"sen\",\n    statistic = \"power\",\n    measure_value = .6,\n    statistic_value = .8,\n    model = \"ggm\",\n    model_matrix = true_model,\n    cores = 9,\n    verbose = TRUE\n)\n\n\nMethod run completed (4.829 sec):\n - converged: yes\n - iterations: 2\n - recommendation: 523"
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#check-the-results",
+    "href": "exercises/sample-size-analysis-powerly.html#check-the-results",
+    "title": "Sample size analysis using powerly",
+    "section": "Check the results",
+    "text": "Check the results\nTo get the information about the results, we can simply use the plot method and indicate the method step that we want to investigate.\nFor Step 1 of the method.\n\n# Plot Step 1.\nplot(results, step = 1)\n\n\n\n\nStep 1 results.\n\n\n\n\nFor Step 2 of the method.\n\n# Plot Step 2.\nplot(results, step = 2)\n\n\n\n\nStep 2 results.\n\n\n\n\nFor Step 3 of the method.\nArguably, the most important step of the method is Step 3, which is where we can see the actual optimal sample recommendation.\n\n# Plot Step 3.\nplot(results, step = 3)\n\n\n\n\nStep 3 results.\n\n\n\n\nAdditionally, we can also use the summary method to get a summary of the results.\n\n# Get a summary of the results.\nsummary(results)\n\n\nMethod run completed (4.829 sec):\n - converged: yes\n - iterations: 2\n - recommendation: 2.5% = 514 | 50% = 523 | 97.5% = 543"
+  },
+  {
+    "objectID": "exercises/sample-size-analysis-powerly.html#validating-the-recommendation",
+    "href": "exercises/sample-size-analysis-powerly.html#validating-the-recommendation",
+    "title": "Sample size analysis using powerly",
+    "section": "Validating the recommendation",
+    "text": "Validating the recommendation\nIt also good practice to validate the optimal sample size recommendation using the validate function by passing in the output obtained from the powerly function, followed by plotting the validation results.\n\n# Run validation.\nvalidation &lt;- validate(\n    method = results,\n    replications = 3000,\n    cores = 9\n)\n\nRunning the validation... \n\nValidation completed (1.9115 sec):\n - sample: 523\n - statistic: 0.7993333\n - measure at 20th pert.: 0.588\n\n# Plot validation.\nplot(validation)\n\n\n\n\nThe validation results."
   },
   {
     "objectID": "exercises/sample-size-solutions-n-1-intensive-designs.html",
