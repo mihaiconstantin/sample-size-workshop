@@ -11,4 +11,4 @@ execute:
     freeze: auto
 ---
 
-*Coming soon.*
+See [powerly.dev/tutorial](https://powerly.dev/tutorial/).
